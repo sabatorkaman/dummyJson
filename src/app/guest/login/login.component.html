@@ -1,24 +1,39 @@
-<section>
-    <div>
-        <!-- <label for="pass" class="block">pass</label> -->
-        <mat-form-field>
-            <mat-label>Username or email</mat-label>
-            <input matInput placeholder="Placeholder" type="text">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-    </div>
-    
-    <div>
-        <!-- 
-        <label for="pass" class="block">pass</label> -->
-        <mat-form-field>
-            <mat-label>password</mat-label>
-            <input matInput placeholder="Placeholder" type="password">
-            <mat-icon matSuffix>vpn_key</mat-icon>
-        </mat-form-field>
-    </div>
-    
-    <button class="w-full text-white">sign in</button>
-    <button mat-flat-button color="secondary">login</button>
+<div class=" flex flex-row border border-green-300">
+    <section class= " flex-1 bg-pink-300 hidden md:block  text-center">test</section>
 
-</section>
+    <section class=" flex flex-1 flex-col items-center gap-8  ">
+        <h1>login user</h1>
+        <form class="flex flex-col  w-95 " [formGroup]="loginForm">
+            <mat-form-field>
+                <mat-label>Username or email</mat-label>
+                <input formControlName="username" matInput placeholder="Placeholder" type="text">
+                @if(loginForm.controls["username"].invalid){
+                <mat-error>error username</mat-error> }
+
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>password</mat-label>
+                <input formControlName="password" matInput placeholder="Placeholder" type="password">
+                @if (loginForm.controls['password'].invalid) {
+                <mat-error>error</mat-error>
+                }
+                <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+
+            <button (click)="loginClick()" [disabled]="!loginForm.valid || isLoading" mat-flat-button
+                color="warn">login</button>
+            @if(loginForm.controls['username'].errors?.['required']){
+            <mat-error>requirefdfd username</mat-error> }
+            @if(loginForm.controls['username'].errors?.['minlength']){
+            <mat-error>minlength username is 4</mat-error> }
+            @if(loginForm.errors?.['loginError']){
+            <mat-error>username invalid</mat-error> }
+        </form>
+        <div class="flex justify-center flex-row items-center gap-3">
+            <div class="w-16 h-[2px] bg-gray-700 block "></div>
+            <div>or</div>
+            <div class="w-16 h-[2px] bg-gray-700 block "></div>
+        </div>
+    </section>
+</div>

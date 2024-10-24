@@ -19,6 +19,7 @@
 // that you are using.
 :root {
   @include mat.all-component-themes(m3-theme.$light-theme);
+  @include mat.color-variants-backwards-compatibility(m3-theme.$light-theme)
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
