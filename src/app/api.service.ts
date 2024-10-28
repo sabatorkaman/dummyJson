@@ -19,6 +19,9 @@ export class ApiService {
     })
 
   }
+  getUserDetail(id:number): Observable<UserDetail> {
+    return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
+  }
 }
 export interface LoginResponse {
 
@@ -32,4 +35,7 @@ export interface LoginResponse {
   accessToken: string, // JWT accessToken (for backward compatibility) in response and cookies
   refreshToken: string // refreshToken in response and cookies
 
+}
+export interface UserDetail {
+  role: string
 }

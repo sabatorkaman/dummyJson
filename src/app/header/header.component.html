@@ -1,0 +1,13 @@
+@if(name() !== undefined){
+<div class="flex bg-gray-50 h-10 justify-between px-10 items-center">
+    <div class="text-center"> wellcome {{name()}}!</div>
+
+    @if(role() === "admin"){
+    <a [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>}
+    <button mat-flat-button class="" (click)="logOut()">log Out</button>
+</div>
+
+}
+@else {
+
+}

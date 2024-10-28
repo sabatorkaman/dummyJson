@@ -1,5 +1,5 @@
 <div class=" flex flex-row border border-green-300">
-    <section class= " flex-1 bg-pink-300 hidden md:block  text-center">test</section>
+    <section class=" flex-1 bg-pink-300 hidden md:block  text-center">test</section>
 
     <section class=" flex flex-1 flex-col items-center gap-8  ">
         <h1>login user</h1>
@@ -20,7 +20,6 @@
                 }
                 <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
-
             <button (click)="loginClick()" [disabled]="!loginForm.valid || isLoading" mat-flat-button
                 color="warn">login</button>
             @if(loginForm.controls['username'].errors?.['required']){
