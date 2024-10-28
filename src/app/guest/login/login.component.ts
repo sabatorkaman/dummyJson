@@ -7,12 +7,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiService } from '../../api.service';
 import { AuthenticationService } from '../../authentication.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterLink, RouterLinkActive
+  imports: [JsonPipe, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterLink, RouterLinkActive
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
