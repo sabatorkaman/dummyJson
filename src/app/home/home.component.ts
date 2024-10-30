@@ -2,11 +2,12 @@ import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { FormGroup } from '@angular/forms';
+import { UsersComponent } from "../admin/users/users.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [UsersComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

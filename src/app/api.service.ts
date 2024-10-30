@@ -19,8 +19,12 @@ export class ApiService {
     })
 
   }
-  getUserDetail(id:number): Observable<UserDetail> {
+  getUserDetail(id: number): Observable<UserDetail> {
     return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
+  }
+  getAllUser():Observable<AllUsers[]> {
+    return this.http.get<AllUsers[]>('https://dummyjson.com/users')
+
   }
 }
 export interface LoginResponse {
@@ -38,4 +42,105 @@ export interface LoginResponse {
 }
 export interface UserDetail {
   role: string
+}
+export interface AllUsers {
+  users: Userinformation[],
+  total: number,
+  skip: number,
+  limit: number
+
+}
+export interface Crypto {
+
+  coin: string,
+  wallet: string,
+  network: string
+
+}
+export interface Userinformation {
+  id: number,
+  firstName: string,
+  lastName: string,
+  maidenName: string,
+  age: number,
+  gender: string,
+  email: string,
+  phone: string,
+  username: string,
+  password: string,
+  birthDate: string,
+  image: string,
+  bloodGroup: string,
+  height: number,
+  weight: number,
+  eyeColor: string,
+  hair: {
+    color: string,
+    type: string
+  },
+  ip: string,
+  address: Adress[],
+
+  macAddress: string,
+  university: string,
+  bank: Bank[],
+  company: Company[],
+  ein: string,
+  ssn: string,
+  userAgent: string,
+  crypto: Crypto
+  role: string
+}
+
+export interface Adress {
+  address: string,
+  city: string,
+  state: string,
+  stateCode: string,
+  postalCode: string,
+  coordinates: {
+    lat: number,
+    lng: number
+  },
+  country: string
+
+
+}
+export interface Bank {
+  cardExpire: string,
+  cardNumber: string,
+  cardType: string,
+  currency: string,
+  iban: string
+}
+export interface Location {
+  lat: number
+  lng: number
+}
+export interface Company {
+  department: string,
+  name: string,
+  title: string,
+  address: {
+    address: string,
+    city: string,
+    state: string,
+    stateCode: string,
+    postalCode: string,
+    coordinates: Location[],
+    country: string
+  }
+}
+export interface Newusers {
+
+  id: number,
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  gender: string,
+  image: string,
+  accessToken: string, // JWT accessToken (for backward compatibility) in response and cookies
+  refreshToken: string // refreshToken in response and cookies
+
 }
