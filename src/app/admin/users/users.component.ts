@@ -5,7 +5,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { AllUsers, ApiService, Newusers, Users } from '../../api.service';
+import { AllUsers, ApiService, Newusers, Userinformation } from '../../api.service';
 
 @Component({
   selector: 'app-users',
@@ -15,27 +15,33 @@ import { AllUsers, ApiService, Newusers, Users } from '../../api.service';
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent implements AfterViewInit{
-applyFilter($event: KeyboardEvent) {
-throw new Error('Method not implemented.');
-}
+export class UsersComponent implements AfterViewInit {
+
   private api = inject(ApiService)
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'age'];
-  dataSource = new MatTableDataSource<Users>;
+  displayedColumns: string[] = ['firstName', 'lastName', 'email'];
+  dataSource: MatTableDataSource<Userinformation>;
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  users?: Users[]
-  constructor() {
+  users?: Userinformation[]
+  allUsers?: AllUsers
 
+  constructor() {
+    this.dataSource = new MatTableDataSource();
   }
   ngAfterViewInit() {
     this.dataSource.sort = this.sort
     this.api.getAllUser()
       .subscribe((data) => {
-        console.log(data)
-       this.dataSource.data=data
-        // console.log(this.users)
-    
+        //console.log(data)
+        //console.log(this.users)
+        this.allUsers = data
+        this.users = this.allUsers.users
+        this.dataSource = new MatTableDataSource(this.users)
+        // this.dataSource.data=this.users
+        //this.dataSource.data = data
+        //console.log(this.dataSource.data = this.users)
+        //let me = this.users
+        //console.log(me)
       })
   }
 

@@ -1,1 +1,6 @@
+<h1>{{name | json}}</h1>
 <p>add-user works!</p>
+
+@for (item of asses.users; track $index) {
+{{item|json}}
+}

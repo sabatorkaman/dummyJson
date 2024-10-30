@@ -22,8 +22,8 @@ export class ApiService {
   getUserDetail(id: number): Observable<UserDetail> {
     return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
   }
-  getAllUser():Observable<Users[]> {
-    return this.http.get<Users[]>('https://dummyjson.com/users')
+  getAllUser(): Observable<AllUsers> {
+    return this.http.get<AllUsers>('https://dummyjson.com/users')
 
   }
 }
@@ -145,7 +145,7 @@ export interface Newusers {
   refreshToken: string // refreshToken in response and cookies
 
 }
-export interface Users{
+export interface User {
   id: number,
   firstName: string,
   lastName: string,
