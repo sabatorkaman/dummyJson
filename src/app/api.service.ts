@@ -22,13 +22,12 @@ export class ApiService {
   getUserDetail(id: number): Observable<UserDetail> {
     return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
   }
-  getAllUser():Observable<AllUsers[]> {
-    return this.http.get<AllUsers[]>('https://dummyjson.com/users')
+  getAllUser():Observable<Users[]> {
+    return this.http.get<Users[]>('https://dummyjson.com/users')
 
   }
 }
 export interface LoginResponse {
-
   id: number,
   username: string,
   email: string,
@@ -43,6 +42,8 @@ export interface LoginResponse {
 export interface UserDetail {
   role: string
 }
+
+
 export interface AllUsers {
   users: Userinformation[],
   total: number,
@@ -143,4 +144,22 @@ export interface Newusers {
   accessToken: string, // JWT accessToken (for backward compatibility) in response and cookies
   refreshToken: string // refreshToken in response and cookies
 
+}
+export interface Users{
+  id: number,
+  firstName: string,
+  lastName: string,
+  maidenName: string,
+  age: number,
+  gender: string,
+  email: string,
+  phone: string,
+  username: string,
+  password: string,
+  birthDate: string,
+  image: string,
+  bloodGroup: string,
+  height: number,
+  weight: number,
+  eyeColor: string,
 }
