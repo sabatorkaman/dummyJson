@@ -1,4 +1,8 @@
 <div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (change)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
@@ -25,14 +29,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator showFirstLastButtons [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 15,20,25,30]"></mat-paginator>
+  <mat-paginator (page)="onChangePage($event)"  [pageSize]="pageSize" [pageIndex]="pageIndex" showFirstLastButtons [length]="resultsLength" [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15,20,25,30]"></mat-paginator>
 
 </div>
-
-<!-- <div class="flex justify-center gap-6">
-  <button >prev</button>
-  <p>1</p>
-  <p>2</p>
-  <button (click)="nextData()">next</button>
-
-</div> -->

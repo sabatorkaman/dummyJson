@@ -10,24 +10,24 @@ export class ApiService {
 
   constructor() {
 
-
   }
   login(username: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>('https://dummyjson.com/user/login', {
       "username": username,
       "password": password
     })
-
   }
   getUserDetail(id: number): Observable<UserDetail> {
     return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
   }
-  getAllUser(limit:number, skip:number): Observable<AllUsers> {
-    return this.http.get<AllUsers>(`https://dummyjson.com/users?limit=${limit}&skipe=${skip}`)
+  getAllUser(limit: number, skip: number, q: string): Observable<AllUsers> {
+    return this.http.get<AllUsers>(`https://dummyjson.com/users/search?limit=${limit}&skip=${skip}&q=${q}`)
 
   }
 
-
+  addNewUser(data:AddNewUser): Observable<AddNewUser> {
+    return this.http.post<AddNewUser>('https://dummyjson.com/users/add',data)
+  }
 }
 export interface LoginResponse {
   id: number,
@@ -83,7 +83,6 @@ export interface Userinformation {
   },
   ip: string,
   address: Adress[],
-
   macAddress: string,
   university: string,
   bank: Bank[],
@@ -134,24 +133,43 @@ export interface Company {
     country: string
   }
 }
-export interface Newusers {
+// export interface Newusers {
 
-  id: number,
-  username: string,
-  email: string,
+//   id: number,
+//   username: string,
+//   email: string,
+//   firstName: string,
+//   lastName: string,
+//   gender: string,
+//   image: string,
+//   accessToken: string, // JWT accessToken (for backward compatibility) in response and cookies
+//   refreshToken: string // refreshToken in response and cookies
+
+// }
+// export interface User {
+//   id: number,
+//   firstName: string,
+//   lastName: string,
+//   maidenName: string,
+//   age: number,
+//   gender: string,
+//   email: string,
+//   phone: string,
+//   username: string,
+//   password: string,
+//   birthDate: string,
+//   image: string,
+//   bloodGroup: string,
+//   height: number,
+//   weight: number,
+//   eyeColor: string,
+// }
+
+export interface AddNewUser {
+
+  id: number | null,
   firstName: string,
   lastName: string,
-  gender: string,
-  image: string,
-  accessToken: string, // JWT accessToken (for backward compatibility) in response and cookies
-  refreshToken: string // refreshToken in response and cookies
-
-}
-export interface User {
-  id: number,
-  firstName: string,
-  lastName: string,
-  maidenName: string,
   age: number,
   gender: string,
   email: string,
@@ -159,9 +177,5 @@ export interface User {
   username: string,
   password: string,
   birthDate: string,
-  image: string,
-  bloodGroup: string,
-  height: number,
-  weight: number,
-  eyeColor: string,
+
 }

@@ -1,3 +1,53 @@
+<div class=" flex flex-row justify-evenly" [formGroup]="addUser">
+    <div class="flex flex-col w-[400px] justify-center">
+        <mat-form-field>
+            <mat-label>firstName</mat-label>
+            <input formControlName="firstName" matInput>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>latName</mat-label>
+            <input formControlName="lastName" matInput>
+        </mat-form-field>
 
-<p>add-user works!</p>
+        <mat-form-field>
+            <mat-label>age</mat-label>
+            <input formControlName="age" matInput>
+        </mat-form-field>
 
+        <mat-form-field>
+            <mat-label>emial</mat-label>
+            <input formControlName="email" matInput>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>gender</mat-label>
+            <input formControlName="gender" matInput>
+        </mat-form-field>
+
+    </div>
+
+    <div class="flex flex-col w-[500px] justify-center">
+
+        <mat-form-field>
+            <mat-label>password</mat-label>
+            <input formControlName="password" matInput type="password">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>confrim password</mat-label>
+            <input formControlName="confrimPassword" matInput type="password">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>userName</mat-label>
+            <input formControlName="userName" matInput>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>birthDate</mat-label>
+            <input formControlName="birthDate" matInput>
+        </mat-form-field>   <mat-form-field>
+            <mat-label>city</mat-label>
+            <input formControlName="city" matInput>
+        </mat-form-field>
+
+    </div>
+    <button (click)="addUserClick()" mat-flat-button>submit</button>
+
+</div>

@@ -3,7 +3,8 @@
     <div class="text-center"> wellcome {{name()}}!</div>
 
     @if(role() === "admin"){
-    <a [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>}
+    <a [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
+    <a [routerLink]="'add-user'">add user</a>}
     <button mat-flat-button class="" (click)="logOut()">log Out</button>
 </div>
 
