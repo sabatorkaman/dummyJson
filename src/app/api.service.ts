@@ -22,10 +22,12 @@ export class ApiService {
   getUserDetail(id: number): Observable<UserDetail> {
     return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
   }
-  getAllUser(): Observable<AllUsers> {
-    return this.http.get<AllUsers>('https://dummyjson.com/users')
+  getAllUser(limit:number, skip:number): Observable<AllUsers> {
+    return this.http.get<AllUsers>(`https://dummyjson.com/users?limit=${limit}&skipe=${skip}`)
 
   }
+
+
 }
 export interface LoginResponse {
   id: number,
