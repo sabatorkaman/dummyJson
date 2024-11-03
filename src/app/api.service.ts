@@ -25,8 +25,8 @@ export class ApiService {
 
   }
 
-  addNewUser(data:AddNewUser): Observable<AddNewUser> {
-    return this.http.post<AddNewUser>('https://dummyjson.com/users/add',data)
+  addNewUser(data: AddNewUser): Observable<AddNewUser> {
+    return this.http.post<AddNewUser>('https://dummyjson.com/users/add', data)
   }
 }
 export interface LoginResponse {
@@ -177,5 +177,6 @@ export interface AddNewUser {
   username: string,
   password: string,
   birthDate: string,
+  confrimPassword:string
 
 }

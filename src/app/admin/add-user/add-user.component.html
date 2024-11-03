@@ -1,28 +1,39 @@
 <div class=" flex flex-row justify-evenly" [formGroup]="addUser">
+
     <div class="flex flex-col w-[400px] justify-center">
         <mat-form-field>
             <mat-label>firstName</mat-label>
-            <input formControlName="firstName" matInput>
+            <input formControlName="firstName" matInput type="text">
         </mat-form-field>
         <mat-form-field>
             <mat-label>latName</mat-label>
-            <input formControlName="lastName" matInput>
+            <input formControlName="lastName" matInput type="text">
         </mat-form-field>
 
-        <mat-form-field>
+       <div class="flex gap-x-2 justify-around">
+        <mat-form-field class="w-full">
             <mat-label>age</mat-label>
-            <input formControlName="age" matInput>
+            <input formControlName="age" matInput type="number">
         </mat-form-field>
+        <button mat-flat-button>edit</button>
 
-        <mat-form-field>
-            <mat-label>emial</mat-label>
-            <input formControlName="email" matInput>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>gender</mat-label>
-            <input formControlName="gender" matInput>
-        </mat-form-field>
 
+       </div>
+        <div class="flex gap-x-0 justify-around">
+            <mat-form-field class="w-full">
+                <mat-label>emial</mat-label>
+                <input formControlName="email" matInput>
+            </mat-form-field>
+            <button mat-flat-button>edit</button>
+
+        </div>
+        <div class="flex gap-x-0 justify-around">
+            <mat-form-field class="w-full">
+                <mat-label>userName</mat-label>
+                <input formControlName="userName" matInput>
+            </mat-form-field>
+            <button mat-flat-button>edit</button>
+        </div>
     </div>
 
     <div class="flex flex-col w-[500px] justify-center">
@@ -35,19 +46,33 @@
             <mat-label>confrim password</mat-label>
             <input formControlName="confrimPassword" matInput type="password">
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>userName</mat-label>
-            <input formControlName="userName" matInput>
-        </mat-form-field>
-        <mat-form-field>
+
+        <!-- <mat-form-field>
             <mat-label>birthDate</mat-label>
             <input formControlName="birthDate" matInput>
-        </mat-form-field>   <mat-form-field>
-            <mat-label>city</mat-label>
-            <input formControlName="city" matInput>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="birthDate" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-    </div>
-    <button (click)="addUserClick()" mat-flat-button>submit</button>
+        <mat-form-field formGroupName="address">
+            <mat-label>city</mat-label>
+            <input formControlName="city" matInput type="text">
+        </mat-form-field>
 
+        <mat-form-field>
+            <mat-label>gender</mat-label>
+            <mat-select formControlName="gender">
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="male">male</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="flex justify-center w-full">
+    <button class="w-[230px]" (click)="addUserClick()" mat-flat-button>submit</button>
 </div>
