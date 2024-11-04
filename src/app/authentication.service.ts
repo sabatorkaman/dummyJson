@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { LoginResponse, UserDetail } from './api.service';
+import { LoginResponse, Userinformation } from './api.service';
 import { Signal } from '@angular/core';
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { Signal } from '@angular/core';
 export class AuthenticationService {
 
   loginResponse: WritableSignal<LoginResponse | undefined> = signal(undefined)
-  userDetail: WritableSignal<UserDetail | undefined> = signal(undefined)
+  userDetail: WritableSignal<Userinformation | undefined> = signal(undefined)
   constructor() {
     let user = localStorage.getItem("user")
     if (user !== null) {
@@ -21,7 +21,7 @@ export class AuthenticationService {
   }
 
 
-  saveData(loginResopnse: LoginResponse, userDetail: UserDetail) {
+  saveData(loginResopnse: LoginResponse, userDetail: Userinformation) {
     this.loginResponse.set(loginResopnse)
     this.userDetail.set(userDetail)
     localStorage.setItem("user", JSON.stringify(loginResopnse))

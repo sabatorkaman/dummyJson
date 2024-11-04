@@ -17,16 +17,20 @@ export class ApiService {
       "password": password
     })
   }
-  getUserDetail(id: number): Observable<UserDetail> {
-    return this.http.get<UserDetail>(`https://dummyjson.com/users/${id}`)
+  getUserDetail(id: number): Observable<Userinformation> {
+    return this.http.get<Userinformation>(`https://dummyjson.com/users/${id}`)
   }
+  
   getAllUser(limit: number, skip: number, q: string): Observable<AllUsers> {
     return this.http.get<AllUsers>(`https://dummyjson.com/users/search?limit=${limit}&skip=${skip}&q=${q}`)
-
   }
 
   addNewUser(data: AddNewUser): Observable<AddNewUser> {
     return this.http.post<AddNewUser>('https://dummyjson.com/users/add', data)
+  }
+
+  deleteUser(id: number): Observable<Userinformation> {
+    return this.http.delete<Userinformation>(`https://dummyjson.com/users/${id}`)
   }
 }
 export interface LoginResponse {
@@ -41,10 +45,6 @@ export interface LoginResponse {
   refreshToken: string // refreshToken in response and cookies
 
 }
-export interface UserDetail {
-  role: string
-}
-
 
 export interface AllUsers {
   users: Userinformation[],
@@ -177,6 +177,6 @@ export interface AddNewUser {
   username: string,
   password: string,
   birthDate: string,
-  confrimPassword:string
+  confrimPassword: string
 
 }
