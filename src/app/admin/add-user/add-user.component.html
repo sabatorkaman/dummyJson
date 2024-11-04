@@ -1,39 +1,59 @@
 <div class=" flex flex-row justify-evenly" [formGroup]="addUser">
 
-    <div class="flex flex-col w-[400px] justify-center">
+    <div class="flex flex-col w-[500px] justify-center ">
         <mat-form-field>
             <mat-label>firstName</mat-label>
             <input formControlName="firstName" matInput type="text">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>latName</mat-label>
-            <input formControlName="lastName" matInput type="text">
+            @if(addUser.controls["firstName"].errors?.['required']){
+            <mat-error>First name is required</mat-error>
+            }@else if(addUser.controls["firstName"].errors?.['minlength']) {
+            <mat-error>Min Length is {{addUser.controls["firstName"].errors?.['minlength'].requiredLength}} but you type
+                {{addUser.controls["firstName"].errors?.['minlength'].actualLength}}</mat-error>
+            }
         </mat-form-field>
 
-       <div class="flex gap-x-2 justify-around">
+        <mat-form-field>
+            <mat-label>lastName</mat-label>
+            <input formControlName="lastName" matInput type="text">
+            @if(addUser.controls["lastName"].errors?.['required']){
+            <mat-error>First name is required</mat-error>
+            }@else if(addUser.controls["lastName"].errors?.['minlength']) {
+            <mat-error>Min Length is {{addUser.controls["lastName"].errors?.['minlength'].requiredLength}} but you type
+                {{addUser.controls["lastName"].errors?.['minlength'].actualLength}}</mat-error>
+            }
+        </mat-form-field>
+
         <mat-form-field class="w-full">
             <mat-label>age</mat-label>
             <input formControlName="age" matInput type="number">
+            @if(addUser.controls["age"].errors?.["required"]){
+            <mat-error> age is required</mat-error>
+            }@else if(addUser.controls["lastName"].errors?.['maxlength']){
+            <mat-error>max Length is {{addUser.controls['age'].errors?.["maxlength"].requiredLength}} but you type
+                {{addUser.controls["age"].errors?.['maxlength'].actualLength}}
+            </mat-error>
+            }
         </mat-form-field>
-        <button mat-flat-button>edit</button>
 
+        <mat-form-field class="w-full">
+            <mat-label>email</mat-label>
+            <input formControlName="email" matInput>
+            @if(addUser.controls["lastName"].errors?.['required']){
+            <mat-error>First name is required</mat-error>
+            }@else if(addUser.controls["email"].errors?.['minlength']) {
+            <mat-error>Min Length is {{addUser.controls["email"].errors?.['minlength'].requiredLength}} but you type
+                {{addUser.controls["email"].errors?.['minlength'].actualLength}}</mat-error>
+            }
+        </mat-form-field>
 
-       </div>
-        <div class="flex gap-x-0 justify-around">
-            <mat-form-field class="w-full">
-                <mat-label>emial</mat-label>
-                <input formControlName="email" matInput>
-            </mat-form-field>
-            <button mat-flat-button>edit</button>
-
-        </div>
-        <div class="flex gap-x-0 justify-around">
-            <mat-form-field class="w-full">
-                <mat-label>userName</mat-label>
-                <input formControlName="userName" matInput>
-            </mat-form-field>
-            <button mat-flat-button>edit</button>
-        </div>
+        <mat-form-field class="w-full">
+            <mat-label>username</mat-label>
+            <input formControlName="username" matInput type="number">
+            @if(addUser.controls["username"].errors?.['required']){
+            <mat-error>First name is required</mat-error>
+            }@else {
+            }
+        </mat-form-field>
     </div>
 
     <div class="flex flex-col w-[500px] justify-center">
@@ -41,27 +61,43 @@
         <mat-form-field>
             <mat-label>password</mat-label>
             <input formControlName="password" matInput type="password">
+            @if(addUser.controls["password"].errors?.['required']){
+            <mat-error>First name is required</mat-error>
+            }@else if(addUser.controls["password"].errors?.['minlength']) {
+            <mat-error>Min Length is {{addUser.controls["password"].errors?.['minlength'].requiredLength}} but you type
+                {{addUser.controls["password"].errors?.['minlength'].actualLength}}</mat-error>
+            }
         </mat-form-field>
+
         <mat-form-field>
             <mat-label>confrim password</mat-label>
             <input formControlName="confrimPassword" matInput type="password">
+            @if(addUser.controls["confrimPassword"].errors?.['required']){
+            <mat-error>confrim password is required</mat-error>
+            }@else if(addUser.controls["confrimPassword"].errors?.['minlength']) {
+            <mat-error>Min Length is {{addUser.controls["confrimPassword"].errors?.['minlength'].requiredLength}} but
+                you type
+                {{addUser.controls["confrimPassword"].errors?.['minlength'].actualLength}}</mat-error>
+            }
         </mat-form-field>
 
-        <!-- <mat-form-field>
-            <mat-label>birthDate</mat-label>
-            <input formControlName="birthDate" matInput>
-        </mat-form-field> -->
         <mat-form-field class="example-full-width">
             <mat-label>Choose a date</mat-label>
             <input formControlName="birthDate" matInput [matDatepicker]="picker">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            @if(addUser.controls["birthDate"].errors?.['required']){
+            <mat-error>birthDate is required</mat-error>
+            }
         </mat-form-field>
 
         <mat-form-field formGroupName="address">
             <mat-label>city</mat-label>
             <input formControlName="city" matInput type="text">
+            <!-- @if(addUser.controls["city"].errors?.['required']){
+            <mat-error>city is required</mat-error>
+            } -->
         </mat-form-field>
 
         <mat-form-field>
@@ -70,9 +106,12 @@
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">male</mat-option>
             </mat-select>
+            @if(addUser.controls["gender"].errors?.['required']){
+            <mat-error>gender is required</mat-error>
+            }
         </mat-form-field>
     </div>
 </div>
-<div class="flex justify-center w-full">
-    <button class="w-[230px]" (click)="addUserClick()" mat-flat-button>submit</button>
+<div class="flex justify-center w-full pt-10">
+    <button class="w-[230px]" (click)="addUserClick()" disabled="!addUser.valid" mat-flat-button>submit</button>
 </div>

@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { AddNewUser, ApiService } from '../../api.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -26,21 +26,20 @@ export class AddUserComponent {
   private fb = inject(FormBuilder)
   addUser: FormGroup
   city = ""
-
   constructor() {
     this.addUser = this.fb.group({
-
       firstName: this.fb.control('', [
         Validators.required,
-        Validators.maxLength(5)
+        Validators.minLength(3)
 
       ]),
       lastName: this.fb.control('', [
         Validators.required,
-        Validators.maxLength(5)
+        Validators.minLength(3)
       ]),
       age: this.fb.control('', [
         Validators.required,
+        Validators.maxLength(2)
 
       ]),
       email: this.fb.control('', [
@@ -52,12 +51,14 @@ export class AddUserComponent {
       ]),
 
       password: this.fb.control('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4)
       ]),
       confrimPassword: this.fb.control('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4)
       ]),
-      userName: this.fb.control('', [
+      username: this.fb.control('', [
         Validators.required
       ]),
       birthDate: this.fb.control('', [
@@ -68,7 +69,8 @@ export class AddUserComponent {
           Validators.required
         ])
       })
-    }, { Validators: this.checked("password", "confrimPassword") }
+    },
+      { validators: this.checked("password", "confrimPassword") }
     )
   }
   addUserClick() {
@@ -77,15 +79,19 @@ export class AddUserComponent {
       console.log(data.confrimPassword)
     })
   }
-  checked(password: string, confrimPassword: string) {
-    return (group: FormGroup) => {
-      let passwordInput = group.controls[password],
-        passwordConfirmationInput = group.controls[confrimPassword];
+
+  checked(password: string, confrimPassword: string): ValidatorFn {
+    return (abstractControl: AbstractControl) => {
+      let passwordInput = abstractControl.get(password)!!,
+        passwordConfirmationInput = abstractControl.get(confrimPassword)!!;
       if (passwordInput.value !== passwordConfirmationInput.value) {
-        return passwordConfirmationInput.setErrors({ notEquivalent: true })
+        let error = { notEquivalent: true }
+        passwordConfirmationInput.setErrors(error)
+        return error
       }
       else {
-        return passwordConfirmationInput.setErrors(null);
+        passwordConfirmationInput.setErrors(null);
+        return null
       }
     }
   }
