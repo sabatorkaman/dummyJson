@@ -10,17 +10,27 @@ import { debounceTime, merge, startWith } from 'rxjs';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule, MatCardModule, RouterLink, MatIcon],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule, MatCardModule, RouterLink, MatIcon,
+    MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
   templateUrl: './users2.component.html',
   styleUrl: './users2.component.scss'
 })
 
 export class UsersComponent implements AfterViewInit {
-
+  readonly dialog = inject(MatDialog);
   private api = inject(ApiService)
   private route = inject(ActivatedRoute)
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'action', 'delete'];
@@ -33,6 +43,10 @@ export class UsersComponent implements AfterViewInit {
   userId: number = 0
   constructor() {
     this.dataSource = new MatTableDataSource();
+    
+  }
+  openDialog() {
+    this.dialog.open(DialogElementsExampleDialog);
   }
 
   ngAfterViewInit() {
@@ -60,5 +74,9 @@ export class UsersComponent implements AfterViewInit {
 
     }
   }
+  
+
 
 }
+export class DialogElementsExampleDialog {}
+

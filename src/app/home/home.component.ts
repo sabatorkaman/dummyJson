@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { FormGroup } from '@angular/forms';
 import { AddUserComponent } from "../admin/add-user/add-user.component";
+import { EditUserComponent } from "../admin/edit-user/edit-user.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AddUserComponent],
+  imports: [AddUserComponent, EditUserComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
