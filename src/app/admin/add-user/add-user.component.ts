@@ -9,12 +9,12 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { RouterLink } from '@angular/router'; 
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule,RouterLink],
+  imports: [MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, RouterLink],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
   providers: [
@@ -75,13 +75,7 @@ export class AddUserComponent {
       { validators: this.checked("password", "confrimPassword") }
     )
   }
-   ngOnInit(): void {
-
-  
-  
-
-
-
+  ngOnInit(): void {
     this.router.queryParams.subscribe(param => {
       this.userId = param["id"]
       console.log(this.userId)

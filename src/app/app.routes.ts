@@ -10,7 +10,8 @@ export const routes: Routes = [
     {
         path: "home",
         component: HomeComponent,
-        canActivate: [isAuthenticated]
+        canActivate: [isAuthenticated],
+
     },
     {
         path: "login",
@@ -24,11 +25,15 @@ export const routes: Routes = [
         canActivate: [isAuthenticated, hasAdminRole],
     },
     {
-        path:"add-user",
-        component:AddUserComponent
+        path: "add-user",
+     
+        // component: AddUserComponent
+        loadComponent:()=>import('./admin/add-user/add-user.component').then((mod)=> mod.AddUserComponent)
     },
+    
     {
-        path:"edit-user/:id",
-        component:EditUserComponent
-    }
+        path: "edit-user/:id",
+        component: EditUserComponent
+    },
+    
 ];
