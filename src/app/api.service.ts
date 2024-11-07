@@ -35,6 +35,9 @@ export class ApiService {
   editUser(id: number, data: Userinformation): Observable<Userinformation> {
     return this.http.put<Userinformation>(`https://dummyjson.com/users/${id}`, data)
   }
+  getPost(limit: number, skip: number): Observable<AllPostDetails> {
+    return this.http.get<AllPostDetails>(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`)
+  }
 }
 export interface LoginResponse {
   id: number,
@@ -181,5 +184,26 @@ export interface AddNewUser {
   password: string,
   birthDate: string,
   confrimPassword: string
+
+}
+
+export interface AllPostDetails {
+
+  posts: PostDetail[],
+  total: number,
+  skip: number,
+  limit: number
+}
+export interface PostDetail {
+  id: number,
+  title: string,
+  body: string,
+  tags: string[],
+  reactions: {
+    likes: number,
+    dislikes: number
+  },
+  views: number,
+  userId: number
 
 }

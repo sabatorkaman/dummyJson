@@ -5,6 +5,7 @@
     @if(role() === "admin"){
     <a mat-button [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
     <a mat-button [routerLink]="'add-user'">add user</a>}
+    <a mat-button [routerLink]=" '/post'"> posts</a>
     <button mat-icon-button aria-label="logout" class="" (click)="logOut()">
         <mat-icon>logout</mat-icon>
     </button>
