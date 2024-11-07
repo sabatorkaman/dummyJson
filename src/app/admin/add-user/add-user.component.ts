@@ -8,13 +8,13 @@ import { ApiService } from '../../api.service';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerControl, MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterLink } from '@angular/router';
-
+import { MatCard,MatCardActions,MatCardContent } from '@angular/material/card';
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, RouterLink],
+  imports: [MatCardContent,MatCardActions,MatCard,MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, RouterLink],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
   providers: [
@@ -26,8 +26,7 @@ export class AddUserComponent {
   private api = inject(ApiService)
   private fb = inject(FormBuilder)
   addUser: FormGroup
-  city = ""
-  userId = 0
+  userId ?:number
   constructor() {
     this.addUser = this.fb.group({
       firstName: this.fb.control('', [
@@ -82,6 +81,7 @@ export class AddUserComponent {
       if (this.userId !== undefined) {
         this.api.getUserDetail(this.userId)
           .subscribe((element) => {
+            let newDate = new Date(element.birthDate);
             console.log(element)
             this.addUser.get("firstName")?.setValue(element.firstName)
             this.addUser.get("lastName")?.setValue(element.lastName)
@@ -91,7 +91,7 @@ export class AddUserComponent {
             this.addUser.get("username")?.setValue(element.username)
             this.addUser.get("password")?.setValue(element.password)
             this.addUser.get("confrimPassword")?.setValue(element.password)
-            this.addUser.get("birthDate")?.setValue(element.birthDate)
+            this.addUser.get("birthDate")?.setValue(newDate)
             this.addUser.get("address")?.get("city")?.setValue(element.address.city)
             console.log(element.birthDate)
           })
@@ -99,17 +99,21 @@ export class AddUserComponent {
     })
   }
   submitClick() {
-    this.api.addNewUser(this.addUser.value).subscribe((data) => {
-      console.log(data)
-      console.log(data.birthDate)
-    })
+    if (this.userId !== undefined) {
+      this.api.editUser(this.userId, this.addUser.value).subscribe((data) => {
+        console.log(data)
+      })
+    }
+    else {
+      this.api.addNewUser(this.addUser.value).subscribe((data) => {
+        console.log(data)
+        console.log(data.birthDate)
+      })
+    }
   }
 
-  editClick(){
-    this.api.addNewUser(this.addUser.value).subscribe((data) => {
-      console.log(data)
-      console.log(data.birthDate)
-    })
+  editClick() {
+
   }
   checked(password: string, confrimPassword: string): ValidatorFn {
     return (abstractControl: AbstractControl) => {
@@ -126,4 +130,6 @@ export class AddUserComponent {
       }
     }
   }
+
+
 }

@@ -20,7 +20,7 @@ export class ApiService {
   getUserDetail(id: number): Observable<Userinformation> {
     return this.http.get<Userinformation>(`https://dummyjson.com/users/${id}`)
   }
-  
+
   getAllUser(limit: number, skip: number, q: string): Observable<AllUsers> {
     return this.http.get<AllUsers>(`https://dummyjson.com/users/search?limit=${limit}&skip=${skip}&q=${q}`)
   }
@@ -31,6 +31,9 @@ export class ApiService {
 
   deleteUser(id: number): Observable<Userinformation> {
     return this.http.delete<Userinformation>(`https://dummyjson.com/users/${id}`)
+  }
+  editUser(id: number, data: Userinformation): Observable<Userinformation> {
+    return this.http.put<Userinformation>(`https://dummyjson.com/users/${id}`, data)
   }
 }
 export interface LoginResponse {

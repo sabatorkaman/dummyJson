@@ -1,0 +1,15 @@
+@use "@angular/material" as mat;
+@import "../../m3-theme.scss";
+
+::ng-deep .light-theme nav {
+    background-color:  mat.get-theme-color($light-theme, primary, 70);
+    color: mat.get-theme-color($light-theme, primary, 0);
+}
+::ng-deep .dark-theme nav {
+    background-color: mat.get-theme-color($dark-theme, primary, 70);
+    background-color: mat.get-theme-color($dark-theme, primary, 0);
+}
+::ng-deep .blue-theme nav {
+    background-color: mat.get-theme-color($blue-theme, primary, 70);
+    background-color: mat.get-theme-color($blue-theme, primary, 0);
+}

@@ -33,10 +33,8 @@ export class UsersComponent implements AfterViewInit {
   resultsLength = 0
   filterValue: string = ""
   search = ""
-  userId: number = 0
   constructor() {
     this.dataSource = new MatTableDataSource();
-
   }
   openDialog(e: Userinformation) {
     let refDialog = this.dialog.open(DialogComponent, {
@@ -48,14 +46,11 @@ export class UsersComponent implements AfterViewInit {
         this.api.deleteUser(e.id).subscribe((del) => {
           console.log(del)
           this.dataSource.data = this.dataSource.data.filter((item) => item.id !== e.id
-
           )
           console.log(this.dataSource.data)
         })
-
       }
     })
-
   }
 
   ngAfterViewInit() {

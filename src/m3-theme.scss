@@ -149,3 +149,10 @@ $dark-theme: mat.define-theme((
     tertiary: $_tertiary,
   ),
 ));
+$blue-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+    tertiary: $_tertiary,
+  ),
+));

@@ -1,14 +1,24 @@
 @if(name() !== undefined){
-<div class="flex bg-gray-50 h-10 justify-between px-10 items-center">
+<nav class="flex h-10 justify-between px-10 items-center  ">
     <div class="text-center"> wellcome {{name()}}!</div>
 
     @if(role() === "admin"){
-    <a [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
-    <a [routerLink]="'add-user'">add user</a>}
-    <button mat-flat-button class="" (click)="logOut()">log Out</button>
-</div>
+    <a mat-button [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
+    <a mat-button [routerLink]="'add-user'">add user</a>}
+    <button mat-icon-button aria-label="logout" class="" (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="logout" class="" (click)="changeTheme()">
+        @if(theme == 'dark'){
+        <mat-icon>dark_mode</mat-icon>
+        }@else if(theme == "light") {
+        <mat-icon>light_mode</mat-icon>
+        }
+        @else if(theme == "blue"){
+        <mat-icon>close</mat-icon>
 
-}
-@else {
+        }
+    </button>
+</nav>
 
 }
