@@ -83,17 +83,16 @@ export class AddUserComponent {
         this.api.getUserDetail(this.userId)
           .subscribe((element) => {
             console.log(element)
-            this.addUser.controls["firstName"].setValue(element.firstName)
-            this.addUser.controls["lastName"].setValue(element.lastName)
-            this.addUser.controls["age"].setValue(element.age)
-
-            this.addUser.controls["email"].setValue(element.email)
-            this.addUser.controls["username"].setValue(element.username)
-            this.addUser.controls["password"].setValue(element.password)
-            this.addUser.controls["confrimPassword"].setValue(element.password)
-            this.addUser.controls["birthDate"].setValue(element.birthDate)
-            // this.addUser.controls["address"].setValue(element.address)
-            this.addUser.controls["gender"].setValue(element.gender)
+            this.addUser.get("firstName")?.setValue(element.firstName)
+            this.addUser.get("lastName")?.setValue(element.lastName)
+            this.addUser.get("age")?.setValue(element.age)
+            this.addUser.get("email")?.setValue(element.email)
+            this.addUser.get("gender")?.setValue(element.gender)
+            this.addUser.get("username")?.setValue(element.username)
+            this.addUser.get("password")?.setValue(element.password)
+            this.addUser.get("confrimPassword")?.setValue(element.password)
+            this.addUser.get("birthDate")?.setValue(element.birthDate)
+            this.addUser.get("address")?.get("city")?.setValue(element.address.city)
             console.log(element.birthDate)
           })
       }
@@ -106,6 +105,12 @@ export class AddUserComponent {
     })
   }
 
+  editClick(){
+    this.api.addNewUser(this.addUser.value).subscribe((data) => {
+      console.log(data)
+      console.log(data.birthDate)
+    })
+  }
   checked(password: string, confrimPassword: string): ValidatorFn {
     return (abstractControl: AbstractControl) => {
       let passwordInput = abstractControl.get(password)!!,

@@ -113,11 +113,12 @@
         </mat-form-field>
     </div>
 </div>
-<!-- @if(userId !== undefined){
-<button>submit edit</button>
-}@else { -->
+@if(userId !== undefined){
 <div class="flex justify-center w-full pt-10">
-    <button class="w-[230px]" (click)="submitClick()"  mat-flat-button>submit</button>
+    <button (click)="editClick()" mat-flat-button>submit edit</button>
 </div>
-<!-- } -->
-
+}@else {
+<div class="flex justify-center w-full pt-10">
+    <button class="w-[230px]" (click)="submitClick()" mat-flat-button>submit</button>
+</div>
+}

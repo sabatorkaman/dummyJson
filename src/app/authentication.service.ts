@@ -1,6 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { LoginResponse, Userinformation } from './api.service';
-import { Signal } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +18,6 @@ export class AuthenticationService {
 
     }
   }
-
 
   saveData(loginResopnse: LoginResponse, userDetail: Userinformation) {
     this.loginResponse.set(loginResopnse)

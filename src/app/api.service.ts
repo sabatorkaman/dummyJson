@@ -82,7 +82,7 @@ export interface Userinformation {
     type: string
   },
   ip: string,
-  address: Adress[],
+  address: Adress,
   macAddress: string,
   university: string,
   bank: Bank[],

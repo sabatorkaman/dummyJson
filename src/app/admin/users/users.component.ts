@@ -5,13 +5,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AllUsers, ApiService, Userinformation } from '../../api.service';
-import { PagingComponent } from "../../paging/paging.component";
 import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, PagingComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
