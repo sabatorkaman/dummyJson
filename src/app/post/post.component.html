@@ -1,1 +1,35 @@
-<p>post works!</p>
+@for (post of postData?.posts; track $index) {
+<div class="flex justify-center flex-wrap my-4 ">
+    <mat-card class="example-card w-[600px]" appearance="outlined">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{post.title}}</mat-card-title>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <img mat-card-image src={{avator}} alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            {{post.body}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="clickLike()" mat-button>{{post.reactions.likes}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="thumb_up"></mat-icon>
+
+            </button>
+            <button mat-button>{{post.reactions.dislikes}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="thumb_down"></mat-icon>
+
+            </button>
+            <button mat-button>{{post.views}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="redo"></mat-icon>
+
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+
+
+</div>
+}
+<div class="flex justify-center">
+    <button (click)="morPost()">more post</button>
+</div>
