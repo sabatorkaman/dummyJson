@@ -1,0 +1,31 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+    @for (item of postData; track $index) {
+    <mat-card class="example-card  " appearance="outlined">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{item.post.title}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{item.user.image}} alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            {{item.post.body}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="clickLike(item.post)" mat-button class="bg-red-600">{{item.post.reactions.likes}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="thumb_up"></mat-icon>
+
+            </button>
+            <button mat-button>{{item.post.reactions.dislikes}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="thumb_down"></mat-icon>
+
+            </button>
+            <button mat-button>{{item.post.views}}
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="redo"></mat-icon>
+
+            </button>
+            <a mat-icon-button [routerLink]="['/post', item.post.id]" routerLinkActive="router-link-active">
+                <mat-icon>comment</mat-icon>
+            </a>
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>

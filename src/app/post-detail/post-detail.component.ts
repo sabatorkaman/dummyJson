@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ApiService, DetailComment, PostComment } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconButton } from '@angular/material/button';
@@ -16,7 +16,8 @@ export class PostDetailComponent implements OnInit {
   private route = inject(ActivatedRoute)
   id?: number
   dataComment?: DetailComment[]
-  
+  // // @Output() dataCommentSend: {image:string , comment:DetailComment}[]=EventEmitter
+  // pass data in post commponent
   dataComment2:{image:string , comment:DetailComment}[]=[]
   ngOnInit(): void {
     this.route.params.subscribe((param) => {
@@ -39,5 +40,6 @@ export class PostDetailComponent implements OnInit {
   }
   likeClicked(item: DetailComment) {
     item.likes++
+  
   }
 }

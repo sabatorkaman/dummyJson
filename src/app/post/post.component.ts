@@ -7,16 +7,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TemplatePostComponent } from '../template-post/template-post.component';
+import { PostDetailComponent } from "../post-detail/post-detail.component";
+
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule, RouterLink],
+  imports: [TemplatePostComponent, MatCardModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule, RouterLink, PostDetailComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
-  readonly api = inject(ApiService)
+  private api = inject(ApiService)
   postData: { post: PostDetail, user: Userinformation }[] = []
   limit = 3
   skip = -1
