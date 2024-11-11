@@ -27,7 +27,6 @@ export const routes: Routes = [
     },
     {
         path: "add-user",
-
         component: AddUserComponent
         // loadComponent:()=>import('./admin/add-user/add-user.component').then((mod)=> mod.AddUserComponent)
     },
