@@ -1,9 +1,10 @@
 <mat-form-field>
     <input type="" matInput placeholder="" [(ngModel)]="search" (change)="clickFilter()">
 </mat-form-field>
+@for (item of postData; track $index) {
 <app-post-detail></app-post-detail>
 <app-template-post [postData]="postData"></app-template-post>
-
+}
 <div class="flex justify-center">
     <button (click)="morPost()">more post</button>
 </div>
