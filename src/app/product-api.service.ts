@@ -11,6 +11,9 @@ export class ProductApiService {
   getProducts(limit: number, skip: number): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/?limit=${limit}&skip=${skip}`)
   }
+  getProductByCategory(category: string): Observable<AllProducts> {
+    return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}`)
+  }
 }
 
 

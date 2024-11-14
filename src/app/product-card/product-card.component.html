@@ -1,0 +1,41 @@
+@if(product !== undefined){
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <div class="overflow-hidden" mat-card-avatar>
+            <img [src]='product.thumbnail' alt="">
+        </div>
+        <mat-card-title>{{product.title}}</mat-card-title>
+        <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="relative">
+        <img class="m-auto h-[350px]" mat-card-image src={{product.images[imageIndex]}} alt="Photo of a Shiba Inu">
+        @if(product.images.length !== 1){
+        <div class="flex justify-between absolute top-[30%] left-0 right-0">
+            <button class="absolute left-0-5 top-0" mat-icon-button (click)="prveIndex()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back_ios"></mat-icon>
+            </button>
+            <button class="absolute right-5 top-0" mat-icon-button (click)="nextImage()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios"></mat-icon>
+            </button>
+        </div>
+        }
+    </div>
+    <mat-card-content>
+        <div>
+            <mat-chip-set>
+                @for (item of product.tags; track $index) {
+                <mat-chip>{{item}}</mat-chip>
+                }
+            </mat-chip-set>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <a [routerLink]="'/products'" [queryParams]="{category:product.category}" routerLinkActive="router-link-active"
+            mat-button>{{product.category}}</a>
+        <button mat-button>
+            <span class="line-through">{{product.price | currency}}</span>&nbsp;
+            <span>{{ (100- product.discountPercentage) * product.price / 100 | currency }}</span>
+        </button>
+    </mat-card-actions>
+</mat-card>
+}
