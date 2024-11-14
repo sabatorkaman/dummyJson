@@ -7,6 +7,7 @@ import { EditUserComponent } from './admin/edit-user/edit-user.component';
 import { UsersComponent } from './admin/users2/users2.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { ProductsComponent } from './products/products.component';
 
 export const routes: Routes = [
     {
@@ -42,5 +43,9 @@ export const routes: Routes = [
     }, {
         path: "post/:id",
         component: PostDetailComponent
+    },
+    {
+        path: "products",
+        component: ProductsComponent
     }
 ];

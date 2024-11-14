@@ -4,9 +4,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AllUsers, ApiService, Userinformation } from '../../userService.service';
-import { debounceTime } from 'rxjs';
-
+import { AllUsers, Userinformation, userService } from '../../userService.service';
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -16,7 +14,7 @@ import { debounceTime } from 'rxjs';
 })
 
 export class UsersComponent implements AfterViewInit {
-  private api = inject(ApiService)
+  private userApi = inject(userService)
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email'];
   dataSource: MatTableDataSource<Userinformation>;
   @ViewChild(MatSort) sort: MatSort | null = null;
@@ -33,7 +31,7 @@ export class UsersComponent implements AfterViewInit {
   }
   getUser() {
     let newSkip = this.pageIndex * this.pageSize
-    this.api.getAllUser(this.pageSize, newSkip, this.filterValue)
+    this.userApi.getAllUser(this.pageSize, newSkip, this.filterValue)
       .subscribe((data: AllUsers) => {
         this.dataSource.data = data.users
         this.resultsLength = data.total

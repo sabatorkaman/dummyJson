@@ -4,15 +4,16 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AllUsers, ApiService, Userinformation } from '../../userService.service';
+import { Userinformation, userService } from '../../userService.service';
 import { MatCardModule } from '@angular/material/card';
 import { debounceTime, merge, startWith } from 'rxjs';
 import { FormsModule, NgModel } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-users',
@@ -25,7 +26,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 
 export class UsersComponent implements AfterViewInit {
   readonly dialog = inject(MatDialog);
-  private api = inject(ApiService)
+  private userApi = inject(userService)
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'action', 'delete'];
   dataSource: MatTableDataSource<Userinformation>;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
@@ -43,7 +44,7 @@ export class UsersComponent implements AfterViewInit {
 
     refDialog.afterClosed().subscribe((res) => {
       if (res) {
-        this.api.deleteUser(e.id).subscribe((del) => {
+        this.userApi.deleteUser(e.id).subscribe((del) => {
           console.log(del)
           this.dataSource.data = this.dataSource.data.filter((item) => item.id !== e.id
           )
@@ -60,7 +61,7 @@ export class UsersComponent implements AfterViewInit {
         debounceTime(300),
       ).subscribe(() => {
         let newSkip = this.paginator?.pageSize!! * this.paginator?.pageIndex!!
-        this.api.getAllUser(this.paginator?.pageSize!!, newSkip, this.search).subscribe((data) => {
+        this.userApi.getAllUser(this.paginator?.pageSize!!, newSkip, this.search).subscribe((data) => {
           this.dataSource.data = data.users
           this.resultsLength = data.total
         })

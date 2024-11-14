@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
-import { ApiService } from '../../userService.service';
+import { userService } from '../../userService.service';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -23,7 +23,7 @@ import { MatCard, MatCardActions, MatCardContent } from '@angular/material/card'
 })
 export class AddUserComponent {
   private router = inject(ActivatedRoute)
-  private api = inject(ApiService)
+  private userApi = inject(userService)
   private fb = inject(FormBuilder)
   addUser: FormGroup
   userId?: number
@@ -79,7 +79,7 @@ export class AddUserComponent {
       this.userId = param["id"]
       console.log(this.userId)
       if (this.userId !== undefined) {
-        this.api.getUserDetail(this.userId)
+        this.userApi.getUserDetail(this.userId)
           .subscribe((element) => {
             let newDate = new Date(element.birthDate);
             console.log(element)
@@ -100,12 +100,12 @@ export class AddUserComponent {
   }
   submitClick() {
     if (this.userId !== undefined) {
-      this.api.editUser(this.userId, this.addUser.value).subscribe((data) => {
+      this.userApi.editUser(this.userId, this.addUser.value).subscribe((data) => {
         console.log(data)
       })
     }
     else {
-      this.api.addNewUser(this.addUser.value).subscribe((data) => {
+      this.userApi.addNewUser(this.addUser.value).subscribe((data) => {
         console.log(data)
         console.log(data.birthDate)
       })

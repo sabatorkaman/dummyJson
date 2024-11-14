@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ApiService } from '../../userService.service';
+import { userService } from '../../userService.service';
 import { AuthenticationService } from '../../authentication.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { JsonPipe } from '@angular/common';
@@ -19,7 +19,7 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  private api = inject(ApiService)
+  private userApi = inject(userService)
   private fb = inject(FormBuilder)
   private authentication = inject(AuthenticationService)
   private router = inject(Router)
@@ -37,12 +37,12 @@ export class LoginComponent {
 
   loginClick() {
     this.isLoading = true
-    this.api.login(this.loginForm.value.username, this.loginForm.value.password)
+    this.userApi.login(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe({
         next: (res) => {
           console.log(res)
           this.isLoading = false
-          this.api.getUserDetail(res.id)
+          this.userApi.getUserDetail(res.id)
             .subscribe((userDetail) => {
               this.authentication.saveData(res, userDetail)
               this.router.navigate(['/home'])
