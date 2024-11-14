@@ -14,6 +14,10 @@ export class ProductApiService {
   getProductByCategory(category: string): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}`)
   }
+  filterProduct(q:string):Observable<FilterResponse> {
+    return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}`)
+
+  }
 }
 
 
@@ -65,3 +69,14 @@ export interface ProductsDetail {
   images: string[]
 }
 
+export interface FilterResponse {
+  products: ProductsDetail[],
+  total: number,
+  skip: number,
+  limit: number
+}
+export interface ProductFilter {
+  id: number,
+  title: string,
+  category: string
+}

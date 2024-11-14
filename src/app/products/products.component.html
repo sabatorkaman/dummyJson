@@ -1,6 +1,10 @@
+
+<input class="text-red-600" type=""  matInput placeholder="" [(ngModel)]="search" (change)="clickFilter()">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-    @for (product of products; track $index) {
+
+  @for (product of products; track $index) {
 
       <app-product-card [product]="product"></app-product-card>
     }
 </div>
+<button mat-button (click)="moreProduct()">mor product</button>
