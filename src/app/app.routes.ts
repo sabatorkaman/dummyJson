@@ -5,7 +5,7 @@ import { hasAdminRole, isAnonymous, isAuthenticated } from './auth.guard';
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { EditUserComponent } from './admin/edit-user/edit-user.component';
 import { UsersComponent } from './admin/users2/users2.component';
-import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 
 export const routes: Routes = [
@@ -38,7 +38,7 @@ export const routes: Routes = [
     },
     {
         path: "post",
-        component: PostComponent
+        component: PostsComponent
     }, {
         path: "post/:id",
         component: PostDetailComponent

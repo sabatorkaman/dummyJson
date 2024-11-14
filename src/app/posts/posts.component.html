@@ -1,0 +1,11 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+    <mat-form-field class="col-span-full">
+        <input type="" matInput placeholder="" [(ngModel)]="search" (change)="clickFilter()">
+    </mat-form-field>
+    @for (item of postData; track $index) {
+    <app-post-card [user]="item.user" [post]="item.post"></app-post-card>
+    }
+</div>
+<div class="flex justify-center">
+    <button (click)="morPost()">more post</button>
+</div>

@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { LoginResponse, Userinformation } from './api.service';
+import { LoginResponse, Userinformation } from './userService.service';
 @Injectable({
   providedIn: 'root'
 })

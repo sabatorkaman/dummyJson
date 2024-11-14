@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class userService {
   private http = inject(HttpClient)
 
   constructor() {
@@ -35,12 +35,8 @@ export class ApiService {
   editUser(id: number, data: Userinformation): Observable<Userinformation> {
     return this.http.put<Userinformation>(`https://dummyjson.com/users/${id}`, data)
   }
-  getPost(limit: number, skip: number, search: string): Observable<AllPostDetails> {
-    return this.http.get<AllPostDetails>(`https://dummyjson.com/posts/search?limit=${limit}&skip=${skip}&q=${search}`)
-  }
-  getPostComment(id: number, limit: number, skip: number): Observable<PostComment> {
-    return this.http.get<PostComment>(`https://dummyjson.com/posts/${id}/comments?limit=${limit}&skip=${skip}`)
-  }
+
+
 }
 export interface LoginResponse {
   id: number,
@@ -159,40 +155,6 @@ export interface AddNewUser {
 
 }
 
-export interface AllPostDetails {
 
-  posts: PostDetail[],
-  total: number,
-  skip: number,
-  limit: number
-}
-export interface PostDetail {
-  id: number,
-  title: string,
-  body: string,
-  tags: string[],
-  reactions: {
-    likes: number,
-    dislikes: number
-  },
-  views: number,
-  userId: number
 
-}
-export interface PostComment {
-  comments: DetailComment[]
-  total: number,
-  skip: number,
-  limit: number
-}
-export interface DetailComment {
-  id: number,
-  body: string,
-  postId: number, // post id is 1
-  likes: number,
-  user: {
-    id: number,
-    username: string,
-    fullName: string
-  }
-}
+

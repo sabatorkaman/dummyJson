@@ -4,7 +4,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AllUsers, ApiService, Userinformation } from '../../api.service';
+import { AllUsers, ApiService, Userinformation } from '../../userService.service';
 import { MatCardModule } from '@angular/material/card';
 import { debounceTime, merge, startWith } from 'rxjs';
 import { FormsModule, NgModel } from '@angular/forms';

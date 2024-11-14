@@ -4,17 +4,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../userService.service';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerControl, MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterLink } from '@angular/router';
-import { MatCard,MatCardActions,MatCardContent } from '@angular/material/card';
+import { MatCard, MatCardActions, MatCardContent } from '@angular/material/card';
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [MatCardContent,MatCardActions,MatCard,MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, RouterLink],
+  imports: [MatCardContent, MatCardActions, MatCard, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, RouterLink],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
   providers: [
@@ -26,7 +26,7 @@ export class AddUserComponent {
   private api = inject(ApiService)
   private fb = inject(FormBuilder)
   addUser: FormGroup
-  userId ?:number
+  userId?: number
   constructor() {
     this.addUser = this.fb.group({
       firstName: this.fb.control('', [

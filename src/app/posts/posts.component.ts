@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AllPostDetails, ApiService, PostDetail, Userinformation } from '../api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,19 +6,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { TemplatePostComponent } from '../template-post/template-post.component';
 import { PostDetailComponent } from "../post-detail/post-detail.component";
+import { PostCardComponent } from '../post-card/post-card.component';
+import { AllPostDetails, PostApiService, PostDetail } from '../post-api.service';
+import {  Userinformation, userService } from '../userService.service';
 
 
 @Component({
-  selector: 'app-post',
+  selector: 'app-posts',
   standalone: true,
-  imports: [TemplatePostComponent, MatCardModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule, RouterLink, PostDetailComponent],
-  templateUrl: './post.component.html',
-  styleUrl: './post.component.scss'
+  imports: [PostCardComponent, MatCardModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule, RouterLink, PostDetailComponent],
+  templateUrl: './posts.component.html',
+  styleUrl: './posts.component.scss'
 })
-export class PostComponent implements OnInit {
-  private api = inject(ApiService)
+export class PostsComponent implements OnInit {
+  private postApi = inject(PostApiService)
+  private UserApi = inject(userService)
+
   postData: { post: PostDetail, user: Userinformation }[] = []
   limit = 3
   skip = -1
@@ -32,10 +35,10 @@ export class PostComponent implements OnInit {
 
   morPost() {
     this.skip += 1
-    this.api.getPost(this.limit ?? 0, this.skip ?? 0, this.search).subscribe((data) => {
+    this.postApi.getPost(this.limit ?? 0, this.skip ?? 0, this.search).subscribe((data) => {
       console.log(data)
       for (let i = 0; i < data.posts.length; i++) {
-        this.api.getUserDetail(data.posts[i].userId).subscribe((user) => {
+        this.UserApi.getUserDetail(data.posts[i].userId).subscribe((user) => {
           console.log(user)
           this.postData.push({ post: data.posts[i], user: user })
         })
@@ -43,20 +46,6 @@ export class PostComponent implements OnInit {
     })
   }
 
-  clickLike() {
-    this.api.getPost(this.limit ?? 0, this.skip ?? 0, this.search)
-    //   .subscribe((item)=>{
-    //   item.posts.map((item=>{
-    //     console.log(item.reactions.likes)
-    //     this.like=item.reactions.likes
-    //     this.like +=1
-    //     console.log(this.like)
-    //   }))
-
-    // })
-    // this.like+=1
-    // console.log(this.like)
-  }
   clickFilter() {
     this.skip = -1
     this.postData = []
