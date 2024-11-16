@@ -3,11 +3,11 @@ import { ProductApiService, ProductsDetail } from '../product-api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { PostCardComponent } from "../post-card/post-card.component";
 import { ProductCardComponent } from "../product-card/product-card.component";
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { PortalModule } from '@angular/cdk/portal';
-import { forkJoin, switchMap } from 'rxjs';
+import { forkJoin, merge, switchMap } from 'rxjs';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -18,79 +18,104 @@ import { forkJoin, switchMap } from 'rxjs';
 export class ProductsComponent implements OnInit {
   private productApi = inject(ProductApiService)
   private route = inject(ActivatedRoute)
-  products?: ProductsDetail[]
-  limit = 12
+  private router = inject(Router)
+  products: ProductsDetail[] = []
+  limit = 2
   category?: ""
   search = ""
-  skip = -1
-  sortData = ""
-  isAssending = true
-  price = ""
+  skip?: number
+  price?: number | undefined
+  sortBy?: "price" | "title" = "price"
+  order?: "asc" | "desc"
+  totalElement = 0
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       this.category = param["category"]
-      this.isAssending = param["sort"]=== true
-
-
+      console.log(this.order)
+      this.order = param["order"]
+      this.sortBy = param["sort"]
+      this.search = param["search"] ?? ""
+      console.log(this.category)
+      this.moreProduct()
     })
-    this.productApi.getProducts(this.limit, 0)
-    .subscribe(items => {
-      console.log(items.products)
-      this.products = items.products
-      this.SortClick()
-
-
-
-    })
-
 
   }
+
+
   clickFilter() {
-    this.productApi.filterProducts(this.search).subscribe((item) => {
-      console.log(item)
-      this.products = item.products
+    this.products = []
+    this.skip = undefined
+    this.router.navigate(["/products"], {
+      // replaceUrl: true, #Not push url change in history
+      queryParams: { category: this.category, order: this.order, sort: this.sortBy, search: this.search },
     })
+
   }
   moreProduct() {
-    this.skip += 1
-    this.productApi.getProducts(this.limit, this.skip).subscribe((item) => {
-      if (this.products !== undefined) {
-        if (item.products.length === 0) {
-          console.log('No more products to load');
-        } else {
-          this.products = this.products.concat(item.products);
-        }
+    if (this.skip !== undefined) {
+      this.skip += this.limit
+    } else {
+      this.skip = 0
+    }
+    if (this.skip <= this.totalElement) {
+      if (this.category !== undefined) {
+        this.productApi.getProductByCategory(this.category, this.limit, this.skip).subscribe((item) => {
+          this.products = this.products.concat(item.products)
+          this.totalElement = item.total
+        })
       }
-    });
+      else if (this.search === "") {
+        this.productApi.getProducts(this.limit, this.skip, this.sortBy, this.order).subscribe((item) => {
+          this.products = this.products.concat(item.products);
+          this.totalElement = item.total
+        });
+      }
+      else {
+        this.productApi.filterProducts(this.search, this.limit, this.skip).subscribe((item) => {
+          this.products = this.products.concat(item.products)
+          this.totalElement = item.total
+        })
+      }
+    }
+
+
 
   }
-  SortClick() {
-        this.isAssending=!this.isAssending
-
-    // this.productApi.SortProducts(this.price).subscribe((item) => {
-
-     
-    //     console.log(item.length)
-   
-    // })
-
-    // this.isAssending=!this.isAssending
-    // if (this.isAssending === true) {
-    //   alert("treue")
-    // }
-
+  orderClick() {
+    console.log("hi")
+    let nextOrder: 'asc' | 'desc' = (this.order === "asc" ? "desc" : "asc")
+    this.router.navigate(["/products"], {
+      // replaceUrl: true, #Not push url change in history
+      queryParams: { category: this.category, order: nextOrder, sort: this.sortBy, search: this.search },
+    })
+    this.products = []
+    this.skip = undefined
+    this.order = nextOrder
   }
 
+  sortChange() {
+    this.router.navigate(["/products"], {
+      // replaceUrl: true, #Not push url change in history
+      queryParams: { category: this.category, order: this.order, sort: this.sortBy, search: this.search },
+    })
+    this.products = []
+    this.skip = undefined
 
-
-
-
+  }
 }
 
 
 
 
-
+// console.log("hi")
+// let nextOrder: 'asc' | 'desc' = (this.order === "asc" ? "desc" : "asc")
+// this.router.navigate(["/products"], {
+//   // replaceUrl: true, #Not push url change in history
+//   queryParams: { category: this.category, order: nextOrder,sort:this.sortBy },
+// })
+// this.products = []
+// this.skip = undefined
+// this.order = nextOrder
 
 
 

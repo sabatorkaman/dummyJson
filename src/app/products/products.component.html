@@ -1,19 +1,22 @@
 <div class="flex justify-between">
   <input class="text-red-600" type="" matInput placeholder="" [(ngModel)]="search" (change)="clickFilter()">
-<!-- <button  (click)="SortClick()"> -->
-  <a [routerLink]="'/products'" [queryParams]="{sort: isAssending}" (click)="SortClick()" routerLinkActive="router-link-active"  mat-button class="">sort</a>
-
-<!-- </button> -->
-  <!-- <select name="sort" id="" [(ngModel)]="sortData" (change)="SortClick()">
+  <button (click)="orderClick()">
+    sort by order: {{this.order}}
+  </button>
+  <select name="sort" id="" [(ngModel)]="sortBy" (change)="sortChange()">
     <option value="title">title</option>
-    <option value="price"></option>
-  </select> -->
+    <option value="price">price</option>
+  </select>
+
+
+  <!-- <a [routerLink]="'/products'" [queryParams]="{sort: !(isAssending), order:nextOrder}" routerLinkActive="router-link-active"  mat-button class="">sort</a> -->
+
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-
   @for (product of products; track $index) {
-
-  <app-product-card [product]="product" ></app-product-card>
+  <app-product-card [product]="product"></app-product-card>
   }
 </div>
 <button mat-button (click)="moreProduct()">mor product</button>
+<!-- !(order === "asc" ? "des" : "asc") -->
+ {{skip}}
