@@ -14,9 +14,12 @@ export class ProductApiService {
   getProductByCategory(category: string): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}`)
   }
-  filterProduct(q:string):Observable<FilterResponse> {
+  filterProducts(q: string): Observable<FilterResponse> {
     return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}`)
 
+  }
+  SortProducts(sortBye:string) :Observable<ProductSortDetail[]>{
+ return this.http.get<ProductSortDetail[]>(`https://dummyjson.com/products?sortBy=${sortBye}&order="asc"`)
   }
 }
 
@@ -79,4 +82,15 @@ export interface ProductFilter {
   id: number,
   title: string,
   category: string
+}
+export interface AllSortProducts {
+  products: ProductSortDetail[],
+  total: number,
+  skip: number,
+  limit: number
+}
+export interface ProductSortDetail {
+  id: number,
+  title: string
+  price: number
 }

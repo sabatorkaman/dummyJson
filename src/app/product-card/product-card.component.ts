@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router';
 export class ProductCardComponent implements OnInit {
   @Input() product?: ProductsDetail
   imageIndex = 0
-
+  
   ngOnInit(): void {
 
 
