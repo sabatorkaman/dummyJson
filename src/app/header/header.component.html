@@ -25,3 +25,13 @@
 </nav>
 
 }
+<div>
+    @for (item of categories; track $index) {
+
+    <div class="flex bg-yellow-900">
+
+        <a [routerLink]="'/products'" [queryParams]="{ategory:item}"> {{item}}</a>
+
+    </div>
+    }
+</div>

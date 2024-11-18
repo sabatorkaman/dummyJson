@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, computed, Inject, inject } from '@angular/core';
+import { AfterViewInit, Component, computed, Inject, inject, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { ProductApiService } from '../product-api.service';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,17 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnInit {
   private document = inject<Document>(DOCUMENT)
-
-
   private authontication = inject(AuthenticationService)
   private router = inject(Router)
+  private productApi = inject(ProductApiService)
+  categories?: string[]
+  ngOnInit(): void {
+    this.productApi.getDategoryList().subscribe((category) => {
+      this.categories = category
+    })
+  }
   theme: 'dark' | 'light' | 'blue' = 'dark'
 
   name = computed(() => {

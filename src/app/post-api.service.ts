@@ -20,6 +20,7 @@ export class PostApiService {
   getPostDetail(id:number):Observable<PostDetail>{
     return this.http.get<PostDetail>(`https://dummyjson.com/posts/${id}`)
   }
+
 }
 
 

@@ -21,13 +21,14 @@ export class ProductsComponent implements OnInit {
   private router = inject(Router)
   products: ProductsDetail[] = []
   limit = 2
-  category?: ""
+  // category?: ""
   search = ""
   skip?: number
   price?: number | undefined
   sortBy?: "price" | "title" = "price"
   order?: "asc" | "desc"
   totalElement = 0
+  category?: string
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       this.category = param["category"]
@@ -35,6 +36,7 @@ export class ProductsComponent implements OnInit {
       this.order = param["order"]
       this.sortBy = param["sort"]
       this.search = param["search"] ?? ""
+      this.category = param["category"]
       console.log(this.category)
       this.moreProduct()
     })
@@ -62,6 +64,7 @@ export class ProductsComponent implements OnInit {
         this.productApi.getProductByCategory(this.category, this.limit, this.skip).subscribe((item) => {
           this.products = this.products.concat(item.products)
           this.totalElement = item.total
+          console.log(this.category)
         })
       }
       else if (this.search === "") {
@@ -71,7 +74,7 @@ export class ProductsComponent implements OnInit {
         });
       }
       else {
-        this.productApi.filterProducts(this.search, this.limit, this.skip).subscribe((item) => {
+        this.productApi.filterProducts(this.search, this.limit, this.skip,this.category?? "").subscribe((item) => {
           this.products = this.products.concat(item.products)
           this.totalElement = item.total
         })
