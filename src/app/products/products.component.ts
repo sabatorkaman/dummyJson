@@ -6,8 +6,8 @@ import { ProductCardComponent } from "../product-card/product-card.component";
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { PortalModule } from '@angular/cdk/portal';
-import { forkJoin, merge, switchMap } from 'rxjs';
+
+
 @Component({
   selector: 'app-products',
   standalone: true,

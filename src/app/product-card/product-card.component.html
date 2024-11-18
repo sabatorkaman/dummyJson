@@ -9,7 +9,7 @@
         <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
     </mat-card-header>
     <div class="relative">
-        <img class="m-auto h-[350px]" mat-card-image src={{product.images[imageIndex]}} alt="Photo of a Shiba Inu">
+        <img class="m-auto h-[350px]" mat-card-image ngSrc={{product.images[imageIndex]}} height="350" width="300" alt="Photo of a Shiba Inu">
         @if(product.images.length !== 1){
         <div class="flex justify-between absolute top-[30%] left-0 right-0">
             <button class="absolute left-0-5 top-0" mat-icon-button (click)="prveIndex()">
@@ -37,7 +37,7 @@
             <span class="line-through">{{product.price | currency}}</span>&nbsp;
             <span>{{ (100- product.discountPercentage) * product.price / 100 | currency }}</span>
         </button>
-   
+
     </mat-card-actions>
     <button (click)="addToCartClicked()" mat-flat-button>Add to cart</button>
 </mat-card>

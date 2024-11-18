@@ -7,14 +7,15 @@ import { CurrencyPipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { RouterLink } from '@angular/router';
 import { CartHolderService } from '../cart-holder.service';
-
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, CurrencyPipe, MatChipsModule, RouterLink],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, CurrencyPipe, MatChipsModule, RouterLink, NgOptimizedImage],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
+
 })
 export class ProductCardComponent implements OnInit {
   @Input() product?: ProductsDetail
