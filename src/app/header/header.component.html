@@ -1,37 +1,63 @@
 @if(name() !== undefined){
 <nav class="flex h-10 justify-between px-10 items-center  ">
     <div class="text-center"> wellcome {{name()}}!</div>
+    <div class="hidden  md:block">
+        @if(role() === "admin"){
+        <a mat-button [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
+        <a mat-button [routerLink]="'add-user'">add user</a>}
+        <a mat-button [routerLink]=" '/post'"> posts</a>
+        <a mat-button [routerLink]=" '/products'"> products</a>
 
-    @if(role() === "admin"){
-    <a mat-button [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
-    <a mat-button [routerLink]="'add-user'">add user</a>}
-    <a mat-button [routerLink]=" '/post'"> posts</a>
-    <a mat-button [routerLink]=" '/products'"> products</a>
+        <button mat-icon-button aria-label="logout" class="" (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="logout" class="" (click)="changeTheme()">
+            @if(theme == 'dark'){
+            <mat-icon>dark_mode</mat-icon>
+            }@else if(theme == "light") {
+            <mat-icon>light_mode</mat-icon>
+            }
+            @else if(theme == "blue"){
+            <mat-icon>close</mat-icon>
 
-    <button mat-icon-button aria-label="logout" class="" (click)="logOut()">
-        <mat-icon>logout</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="logout" class="" (click)="changeTheme()">
-        @if(theme == 'dark'){
-        <mat-icon>dark_mode</mat-icon>
-        }@else if(theme == "light") {
-        <mat-icon>light_mode</mat-icon>
-        }
-        @else if(theme == "blue"){
-        <mat-icon>close</mat-icon>
+            }
+        </button>
 
-        }
-    </button>
-</nav>
-
-}
-<div>
-    @for (item of categories; track $index) {
-
-    <div class="flex bg-yellow-900">
-
-        <a [routerLink]="'/products'" [queryParams]="{ategory:item}"> {{item}}</a>
+        <button mat-button [matMenuTriggerFor]="menu">categories</button>
 
     </div>
-    }
-</div>
+
+    <!-- menu header -->
+
+
+
+
+
+    <div class="block md:hidden">
+        <!-- <button mat-icon-button> </button> -->
+        <button mat-icon-button [matMenuTriggerFor]="menu2"><mat-icon>menu</mat-icon></button>
+        <mat-menu #menu2="matMenu">
+            @if(role() === "admin"){
+            <button mat-menu-item> <a mat-button [routerLink]="'/admin/users'"
+                    routerLinkActive="router-link-active">users</a></button>
+            <a mat-menu-item mat-button [routerLink]="'add-user'">add user</a>
+            }
+            <button mat-menu-item><a mat-button [routerLink]=" '/post'"> posts</a></button>
+            <button mat-menu-item><a mat-button [routerLink]=" '/products'"> products</a></button>
+            <button mat-menu-item [matMenuTriggerFor]="menu">categories</button>
+
+        </mat-menu>
+        <mat-menu #menu="matMenu">
+            <div class="w-[600px]">
+                @for (item of categories; track $index) {
+                <a mat-menu-item [routerLink]="'/products'" [queryParams]="{category:item}">
+                    {{item}}</a>}
+            </div>
+        </mat-menu>
+
+    </div>
+
+</nav>
+
+
+}

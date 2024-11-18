@@ -37,6 +37,8 @@
             <span class="line-through">{{product.price | currency}}</span>&nbsp;
             <span>{{ (100- product.discountPercentage) * product.price / 100 | currency }}</span>
         </button>
+   
     </mat-card-actions>
+    <button (click)="addToCartClicked()" mat-flat-button>Add to cart</button>
 </mat-card>
 }

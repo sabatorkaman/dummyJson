@@ -18,8 +18,8 @@ export class ProductApiService {
   getProductByCategory(category: string,limit:number,skip:number): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`)
   }
-  filterProducts(q: string, limit: number, skip: number,category:string): Observable<FilterResponse> {
-    return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}&limit=${limit}&skip=${skip}&category=${category}`)
+  filterProducts(q: string, limit: number, skip: number): Observable<FilterResponse> {
+    return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}&limit=${limit}&skip=${skip}`)
   }
   getDategoryList():Observable<string[]>{
     return this.http.get<string[]>('https://dummyjson.com/products/category-list')
