@@ -39,7 +39,6 @@ export class ProductsComponent implements OnInit {
       this.sortBy = param["sort"]
       this.search = param["search"] ?? ""
       this.category = param["category"]
-
       this.moreProduct()
     })
 

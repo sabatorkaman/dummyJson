@@ -38,7 +38,7 @@ export class ProductCardComponent implements OnInit {
       }
     }
   }
-  prveIndex() {
+  prveImage() {
     if (this.imageIndex > 0) {
       this.imageIndex--
     }

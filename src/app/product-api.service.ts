@@ -21,7 +21,7 @@ export class ProductApiService {
   filterProducts(q: string, limit: number, skip: number): Observable<FilterResponse> {
     return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}&limit=${limit}&skip=${skip}`)
   }
-  getDategoryList():Observable<string[]>{
+  getCategoryList():Observable<string[]>{
     return this.http.get<string[]>('https://dummyjson.com/products/category-list')
   }
 

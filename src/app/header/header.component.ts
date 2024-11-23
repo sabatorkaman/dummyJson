@@ -25,7 +25,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   categories?: string[]
   ngOnInit(): void {
 
-    this.productApi.getDategoryList().subscribe((category) => {
+    this.productApi.getCategoryList().subscribe((category) => {
       this.categories = category
     })
   }
