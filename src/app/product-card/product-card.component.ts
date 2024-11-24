@@ -25,22 +25,5 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  addToCartClicked() {
-    if (this.product !== undefined) {
-      this.cartHolder.addProduct(this.product)
-    }
-  }
-
-  nextImage() {
-    if (this.product !== undefined) {
-      if (this.product?.images.length > this.imageIndex + 1) {
-        this.imageIndex++
-      }
-    }
-  }
-  prveImage() {
-    if (this.imageIndex > 0) {
-      this.imageIndex--
-    }
-  }
+  
 }
