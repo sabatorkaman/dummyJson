@@ -19,11 +19,22 @@ import { NgOptimizedImage } from '@angular/common'
 })
 export class ProductCardComponent implements OnInit {
   @Input() product?: ProductsDetail
-  private cartHolder = inject(CartHolderService)
-  imageIndex = 0
-
+  indexImage = 0
   ngOnInit(): void {
 
   }
+  prveImage() {
+    if (this.indexImage > 0) {
+      this.indexImage--
+    }
   
+  }
+  nextImage() {
+    if (this.product !== undefined) {
+      if (this.indexImage + 1 < this.product.images.length) {
+        this.indexImage++
+      }
+    }
+  }
+
 }

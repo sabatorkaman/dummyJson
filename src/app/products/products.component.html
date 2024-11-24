@@ -1,0 +1,22 @@
+<div class="flex justify-between">
+  <mat-form-field>
+    <input class="text-gray-950" type="text" name="" id="" [(ngModel)]="serachModel" (change)="filterClick()">
+  </mat-form-field>
+  <div>
+    <p class="cursor-pointer" (click)="changeOrder()">sort By order:{{order}}</p>
+  </div>
+  <select name="" id="" [(ngModel)]="sortModel" (change)="changeSortClick()">
+    <option value="price">price</option>
+    <option value="title">title</option>
+  </select>
+</div>
+<div class="flex justify-between flex-wrap gap-5">
+
+  @for (item of products; track $index) {
+
+  <app-product-card [product]="item"></app-product-card>
+  }
+</div>
+<div>
+  <button (click)="moreProduct()">more product</button>
+</div>

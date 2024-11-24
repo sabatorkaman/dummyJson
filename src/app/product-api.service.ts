@@ -8,21 +8,18 @@ import { Observable } from 'rxjs';
 export class ProductApiService {
   private http = inject(HttpClient)
   constructor() { }
-  getProducts(limit: number, skip: number, sortBy?: "price" | "title", order?: "asc" | "desc"): Observable<AllProducts> {
-    if (sortBy !== undefined && order !== undefined) {
-      return this.http.get<AllProducts>(`https://dummyjson.com/products/?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${order}`)
-    } else {
-      return this.http.get<AllProducts>(`https://dummyjson.com/products/?limit=${limit}&skip=${skip}`)
-    }
+  getAllProducts(limit:number , skip:number):Observable<AllProducts>{
+    return this.http.get<AllProducts>(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`)
   }
-  getProductByCategory(category: string,limit:number,skip:number): Observable<AllProducts> {
-    return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`)
+  getSearchProduct(q:string):Observable<AllProducts>{
+    return this.http.get<AllProducts>(`https://dummyjson.com/products/search?q=${q}`)
   }
-  filterProducts(q: string, limit: number, skip: number): Observable<FilterResponse> {
-    return this.http.get<FilterResponse>(`https://dummyjson.com/products/search?q=${q}&limit=${limit}&skip=${skip}`)
+  fliterByCategort(category:string):Observable<AllProducts>{
+    return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}`)
+
   }
-  getCategoryList():Observable<string[]>{
-    return this.http.get<string[]>('https://dummyjson.com/products/category-list')
+  filterBySort(sortBy:"title" | "price" , order:"asc" | "desc"):Observable<AllProducts>{
+    return this.http.get<AllProducts>(`https://dummyjson.com/products?sortBy=${sortBy}&order=${order}`)
   }
 
 }
