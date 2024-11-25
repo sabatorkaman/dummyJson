@@ -5,11 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostDetailComponent } from "../post-detail/post-detail.component";
 import { PostCardComponent } from '../post-card/post-card.component';
 import { AllPostDetails, PostApiService, PostDetail } from '../post-api.service';
-import {  Userinformation, userService } from '../userService.service';
+import { Userinformation, userService } from '../userService.service';
 
 
 @Component({
@@ -22,6 +22,8 @@ import {  Userinformation, userService } from '../userService.service';
 export class PostsComponent implements OnInit {
   private postApi = inject(PostApiService)
   private UserApi = inject(userService)
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
 
   postData: { post: PostDetail, user: Userinformation }[] = []
   limit = 3
@@ -29,7 +31,12 @@ export class PostsComponent implements OnInit {
   like?: number
   getLike?: AllPostDetails
   search = ""
+  newSearch = ""
   ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+      this.newSearch = param["search"]
+      this.search = param["search"]
+    })
     this.morPost()
   }
 
@@ -47,6 +54,10 @@ export class PostsComponent implements OnInit {
   }
 
   clickFilter() {
+
+    this.router.navigate(['post'], {
+      queryParams: { search: this.search }
+    })
     this.skip = -1
     this.postData = []
     this.morPost()

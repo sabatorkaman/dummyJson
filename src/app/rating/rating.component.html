@@ -1,0 +1,11 @@
+@if (rating !== undefined) {
+@for (item of allRating; track rating; let rait = $index, i = $even) {
+
+<mat-icon [class.text-yellow-500]=" item <rating " fontIcon="star"></mat-icon>
+
+<!-- @if(item <= rating){ <mat-icon class="text-yellow-500" fontIcon="star"></mat-icon>
+    }@else {
+    <mat-icon fontIcon="star"></mat-icon>}
+    } -->
+}
+}

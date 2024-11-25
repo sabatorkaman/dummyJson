@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   private route = inject(ActivatedRoute)
   products: ProductsDetail[] = []
   serachModel?: ""
-  limit = 2
+  limit = 30
   skip?: number
   /**search Queryparaam */
   search = ""
@@ -66,7 +66,6 @@ export class ProductsComponent implements OnInit {
       }
       else if (this.search !== "") {
         this.productApi.getSearchProduct(this.search).subscribe((item) => {
-          console.log(item.products)
           this.products = this.products.concat(item.products)
           this.totalElement = item.total
         })

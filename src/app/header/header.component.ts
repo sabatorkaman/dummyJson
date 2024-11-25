@@ -17,13 +17,16 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements AfterViewInit, OnInit {
-  
+
   private document = inject<Document>(DOCUMENT)
   private authontication = inject(AuthenticationService)
   private router = inject(Router)
   private productApi = inject(ProductApiService)
   categories?: string[]
   ngOnInit(): void {
+    this.productApi.getAllCategory().subscribe((category) => {
+      this.categories = category
+    })
 
 
   }

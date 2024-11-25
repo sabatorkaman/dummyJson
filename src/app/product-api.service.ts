@@ -21,6 +21,9 @@ export class ProductApiService {
   filterBySort(sortBy:"title" | "price" , order:"asc" | "desc"):Observable<AllProducts>{
     return this.http.get<AllProducts>(`https://dummyjson.com/products?sortBy=${sortBy}&order=${order}`)
   }
+  getAllCategory():Observable<string[]>{
+    return this.http.get<string[]>('https://dummyjson.com/products/category-list')
+  }
 
 }
 
