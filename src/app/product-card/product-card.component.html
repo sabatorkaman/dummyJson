@@ -42,5 +42,15 @@
             <app-rating [rating]="product.rating"></app-rating>
 
         </p>
+        <button (click)="addToCart()" mat-button>add to cart</button>
+        <!-- @for (item of cartHolder.allProducts(); track $index) {
+        @if(item.product.id === product.id){
+        <span>{{item.count}}</span>
+        }
+        } -->
+        <span>{{count()}}</span>
+        <button (click)="removeFromCart()" mat-button>remove to cart</button>
+
     </mat-card-actions>
+
 </mat-card>}

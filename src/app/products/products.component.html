@@ -1,9 +1,7 @@
-@if(serachModel !== undefined){
 <div class="flex justify-between">
   <mat-form-field>
-    <input class="text-gray-950" type="text" name="" id="" [(ngModel)]="serachModel" (change)="filterClick()">
+    <input matInput class="text-gray-950" type="text" name="" id="" [(ngModel)]="serachModel" (change)="filterClick()">
   </mat-form-field>
-  <p [innerHTML]="serachModel"></p>
   <div>
     <p class="cursor-pointer" (click)="changeOrder()">sort By order:{{order}}</p>
   </div>
@@ -22,4 +20,3 @@
 <div>
   <button (click)="moreProduct()">more product</button>
 </div>
-}

@@ -34,7 +34,7 @@
             @if(role() === "admin"){
             <button mat-menu-item> <a mat-button [routerLink]="'/admin/users'"
                     routerLinkActive="router-link-active">users</a></button>
-            <a mat-menu-item mat-button [routerLink]="'add-user'">add user</a>
+            <a mat-menu-item [routerLink]="'add-user'">add user</a>
             }
             <button mat-menu-item><a mat-button [routerLink]=" '/post'"> posts</a></button>
             <button mat-menu-item><a mat-button [routerLink]=" '/products'"> products</a></button>

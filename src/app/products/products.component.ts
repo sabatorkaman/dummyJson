@@ -6,12 +6,13 @@ import { ProductCardComponent } from "../product-card/product-card.component";
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [FormsModule, RouterLink, MatButtonModule, PostCardComponent, ProductCardComponent, MatFormFieldModule],
+  imports: [FormsModule, RouterLink, MatButtonModule, PostCardComponent, ProductCardComponent, MatFormFieldModule, MatInputModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   products: ProductsDetail[] = []
-  serachModel?: ""
+  serachModel: string | undefined
   limit = 30
   skip?: number
   /**search Queryparaam */
