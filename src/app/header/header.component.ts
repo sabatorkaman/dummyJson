@@ -8,6 +8,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { ProductApiService } from '../product-api.service';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { CartHolderService } from '../cart-holder.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   private authontication = inject(AuthenticationService)
   private router = inject(Router)
   private productApi = inject(ProductApiService)
+  public cartHolder=inject(CartHolderService)
   categories?: string[]
   ngOnInit(): void {
     this.productApi.getAllCategory().subscribe((category) => {

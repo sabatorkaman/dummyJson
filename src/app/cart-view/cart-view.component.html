@@ -1,5 +1,64 @@
-@for (item of cartHolder.allProducts(); track $index) {
-<h1>{{item.product.title}}</h1>
-<p>{{item.count}}</p>
+@if(cartHolder.allProducts().length >0){
+<div class="flex justify-between flex-wrap">
+    @for (product of cartHolder.allProducts(); track $index) {
 
+    <mat-card class="example-card w-[400px] h-[600px] " appearance="outlined">
+        <mat-card-header>
+            <div mat-card-avatar class="overflow-hidden">
+                <img src={{product.product.thumbnail}} alt="">
+            </div>
+            <mat-card-title>{{product.product.title}}</mat-card-title>
+            <mat-card-subtitle>{{product.product.brand}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="overflow-hidden" src={{product.product.images}} alt="Photo of a Shiba Inu">
+        <!-- @if (product.product.images) {
+
+    <div class="flex justify-between absolute top-[30%] left-0 right-0">
+
+        <button class="absolute left-5 top-0" mat-icon-button (click)="prveImage()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back_ios"></mat-icon>
+        </button>
+        <button class="absolute right-5 top-0" mat-icon-button (click)="nextImage()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios"></mat-icon>
+        </button>
+    </div>
+    } -->
+        <mat-card-content>
+            <!-- {{product.description | hilightSearch  : searchText}} -->
+            <p [innerHTML]="product.product.description| highlightSearch: searchText"></p>
+            <div>
+                <mat-chip-set>
+                    @for (tag of product.product.tags; track $index) {
+                    <mat-chip>{{tag}}</mat-chip>
+                    }
+                </mat-chip-set>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button [routerLink]="'/products'"
+                [queryParams]="{category:product.product.category}">{{product.product.category}}</a>
+            <button mat-button>
+                <span class="line-through">{{product.product.price | currency}}</span>&nbsp;
+                <span>{{ (100 - product.product.discountPercentage) * (product.product.price) | currency}}</span>
+            </button>
+            <p>
+
+                <app-rating [rating]="product.product.rating"></app-rating>
+
+            </p>
+        </mat-card-actions>
+        <mat-card-actions class="flex justify-center gap-2">
+            <button (click)="plusProduct(product.product)" mat-mini-fab>+</button>
+            <button (click)="minesProduct(product.product)" mat-mini-fab>-</button>
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>}
+@else {
+<mat-card class="example-car w-[400px] h-[600px] flex justify-center items-center text-center mt-14"
+    appearance="outlined">
+    <div class="flex justify-center items-center text-center pt-11">
+        <h1 class=" w-[300px] h-[600px] ">empyt cart</h1>
+    </div>
+</mat-card>
 }

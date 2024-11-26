@@ -1,56 +1,61 @@
 @if (product !== undefined) {
-<mat-card class="example-card w-[400px] h-[600px] " appearance="outlined">
-    <mat-card-header>
-        <div mat-card-avatar class="overflow-hidden">
-            <img src={{product.thumbnail}} alt="">
+    <mat-card class="example-card w-[400px] h-[600px] " appearance="outlined">
+        <mat-card-header>
+            <div mat-card-avatar class="overflow-hidden">
+                <img src={{product.thumbnail}} alt="">
+            </div>
+            <mat-card-title>{{product.title}}</mat-card-title>
+            <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="overflow-hidden" src={{product.images[indexImage]}} alt="Photo of a Shiba Inu">
+        @if (product.images.length !== 1) {
+
+        <div class="flex justify-between absolute top-[30%] left-0 right-0">
+
+            <button class="absolute left-5 top-0" mat-icon-button (click)="prveImage()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back_ios"></mat-icon>
+            </button>
+            <button class="absolute right-5 top-0" mat-icon-button (click)="nextImage()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios"></mat-icon>
+            </button>
         </div>
-        <mat-card-title>{{product.title}}</mat-card-title>
-        <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image class="overflow-hidden" src={{product.images[indexImage]}} alt="Photo of a Shiba Inu">
-    @if (product.images.length !== 1) {
+        }
+        <mat-card-content>
+            <!-- {{product.description | hilightSearch  : searchText}} -->
+            <p [innerHTML]="product.description | highlightSearch: searchText"></p>
+            <div>
+                <mat-chip-set>
+                    @for (tag of product.tags; track $index) {
+                    <mat-chip>{{tag}}</mat-chip>
+                    }
+                </mat-chip-set>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button [routerLink]="'/products'"
+                [queryParams]="{category:product.category}">{{product.category}}</a>
+            <button mat-button>
+                <span class="line-through">{{product.price | currency}}</span>&nbsp;
+                <span>{{ (100 - product.discountPercentage) * (product.price / 100) | currency}}</span>
+            </button>
+            <p>
 
-    <div class="flex justify-between absolute top-[30%] left-0 right-0">
+                <app-rating [rating]="product.rating"></app-rating>
 
-        <button class="absolute left-5 top-0" mat-icon-button (click)="prveImage()">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back_ios"></mat-icon>
-        </button>
-        <button class="absolute right-5 top-0" mat-icon-button (click)="nextImage()">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios"></mat-icon>
-        </button>
-    </div>
-    }
-    <mat-card-content>
-        <!-- {{product.description | hilightSearch  : searchText}} -->
-        <p [innerHTML]="product.description | highlightSearch: searchText"></p>
-        <div>
-            <mat-chip-set>
-                @for (tag of product.tags; track $index) {
-                <mat-chip>{{tag}}</mat-chip>
-                }
-            </mat-chip-set>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <a mat-button [routerLink]="'/products'" [queryParams]="{category:product.category}">{{product.category}}</a>
-        <button mat-button>
-            <span class="line-through">{{product.price | currency}}</span>&nbsp;
-            <span>{{ (100 - product.discountPercentage) * (product.price / 100) | currency}}</span>
-        </button>
-        <p>
-
-            <app-rating [rating]="product.rating"></app-rating>
-
-        </p>
-        <button (click)="addToCart()" mat-button>add to cart</button>
-        <!-- @for (item of cartHolder.allProducts(); track $index) {
+            </p>
+            <!-- @for (item of cartHolder.allProducts(); track $index) {
         @if(item.product.id === product.id){
         <span>{{item.count}}</span>
         }
         } -->
-        <span>{{count()}}</span>
-        <button (click)="removeFromCart()" mat-button>remove to cart</button>
 
-    </mat-card-actions>
+            <!-- <button (click)="removeFromCart()" mat-button>remove to cart</button> -->
+            <a [routerLink]="'products'" [queryParams]="{id:product.id}">show detail</a>
 
-</mat-card>}
+        </mat-card-actions>
+        <mat-card-actions class="text-center m-auto">
+            <button (click)="addToCart()" mat-button>add to cart</button>
+        </mat-card-actions>
+
+    </mat-card>
+}

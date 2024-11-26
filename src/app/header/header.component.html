@@ -7,7 +7,17 @@
         <a mat-button [routerLink]="'add-user'">add user</a>}
         <a mat-button [routerLink]=" '/post'"> posts</a>
         <a mat-button [routerLink]=" '/products'"> products</a>
+        <a mat-button [routerLink]="'/cart'"><mat-icon fontIcon="shopping_cart">
 
+            </mat-icon> <span>
+                <!-- @for (item of cartHolder.allProducts(); track $index){
+                {{item.count}}
+                } -->
+                @if(cartHolder.uniqeProduct() !== 0){
+                {{cartHolder.uniqeProduct()}}
+                }
+            </span>
+        </a>
         <button mat-icon-button aria-label="logout" class="" (click)="logOut()">
             <mat-icon>logout</mat-icon>
         </button>

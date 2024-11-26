@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { CartDetail, CartService } from './cart.service';
 import { ProductsDetail } from './product-api.service';
 import { count } from 'rxjs';
@@ -8,9 +8,9 @@ import { count } from 'rxjs';
 })
 export class CartHolderService {
   allProducts = signal<CartProduct[]>([])
+  uniqeProduct=computed(()=> this.allProducts().length)
   addProduct(product: ProductsDetail) {
     this.allProducts.update((allProducts) => {
-      debugger
       let result = allProducts.find((item) => {
         return item.product.id === product.id
       })
@@ -34,6 +34,7 @@ export class CartHolderService {
         if (result.count === 0) {
           allProducts = allProducts.filter((item) => {
             return item.count !== 0
+            
           })
 
         }

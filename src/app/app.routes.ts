@@ -8,6 +8,9 @@ import { UsersComponent } from './admin/users2/users2.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { ProductsComponent } from './products/products.component';
+import { CartViewComponent } from './cart-view/cart-view.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 export const routes: Routes = [
     {
@@ -47,6 +50,13 @@ export const routes: Routes = [
     {
         path: "products",
         component: ProductsComponent
+    },
+    {
+        path: "cart",
+        component: CartViewComponent
+    }, {
+        path: "products/:id",
+        component: ProductDetailComponent
     }
-  
+
 ];
