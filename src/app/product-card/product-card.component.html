@@ -59,7 +59,7 @@
     </mat-card-actions>
     }
     <button (click)="moreDetail()">...</button>
-    @if(more !== more){
+    @if(more === true){
     <app-reviews [product]="product"></app-reviews>
     }@else {}
 

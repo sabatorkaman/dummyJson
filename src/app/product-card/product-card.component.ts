@@ -58,7 +58,7 @@ export class ProductCardComponent implements OnInit {
     this.cartHolder.removeProduct(product)
   }
   moreDetail() {
-    this.more = true
+    this.more = !this.more
 
   }
 }
