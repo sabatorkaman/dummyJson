@@ -1,0 +1,6 @@
+@if(product !== undefined){
+@for (item of product.reviews; track $index) {
+<h1>{{item.comment}}.</h1>
+<h1>{{item.reviewerEmail}}</h1>
+}
+}

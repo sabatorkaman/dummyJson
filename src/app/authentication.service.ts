@@ -1,5 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { LoginResponse, Userinformation } from './userService.service';
+import { AllProducts, ProductsDetail } from './product-api.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,8 +30,10 @@ export class AuthenticationService {
   cleardata() {
     localStorage.removeItem("user")
     localStorage.removeItem("detail")
+
     this.userDetail.set(undefined)
     this.loginResponse.set(undefined)
 
   }
+
 }

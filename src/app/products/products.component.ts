@@ -7,12 +7,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { AuthenticationService } from '../authentication.service';
+import { ReviewsComponent } from "../reviews/reviews.component";
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [FormsModule, RouterLink, MatButtonModule, PostCardComponent, ProductCardComponent, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, RouterLink, MatButtonModule, PostCardComponent, ProductCardComponent, MatFormFieldModule, MatInputModule, ReviewsComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -20,9 +22,11 @@ export class ProductsComponent implements OnInit {
   private productApi = inject(ProductApiService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
+  private authentication=inject(AuthenticationService)
+
   products: ProductsDetail[] = []
   serachModel: string | undefined
-  limit = 30
+  limit = 4
   skip?: number
   /**search Queryparaam */
   search = ""
@@ -44,9 +48,9 @@ export class ProductsComponent implements OnInit {
       this.sort = param["sortBy"]
       this.order = param['order']
       this.moreProduct()
+
     })
   }
-
 
   moreProduct() {
 
@@ -62,7 +66,6 @@ export class ProductsComponent implements OnInit {
         this.productApi.fliterByCategort(this.category).subscribe((item) => {
           console.log(item.products)
           this.products = this.products.concat(item.products)
-
         })
       }
       else if (this.search !== "") {
@@ -82,7 +85,7 @@ export class ProductsComponent implements OnInit {
           this.totalElement = item.total
 
         })
-      }
+      } 
     }
   }
 

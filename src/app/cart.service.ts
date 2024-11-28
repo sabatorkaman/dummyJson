@@ -9,8 +9,11 @@ export class CartService {
   private http = inject(HttpClient)
   constructor() { }
 
-  getCartUser(id: number):Observable<CartDetail> {
-   return this.http.get<CartDetail>(`https://dummyjson.com/carts/${id}`)
+  getCartUser(id: number): Observable<CartDetail> {
+    return this.http.get<CartDetail>(`https://dummyjson.com/carts/${id}`)
+  }
+  updateCartProduct(id: number, data: CartUpdate): Observable<CartUpdate> {
+    return this.http.put<CartUpdate>(`https://dummyjson.com/carts/${id}`, data)
 
   }
 }
@@ -36,4 +39,10 @@ export interface CartProduct {
 
 
 
+}
+export interface CartUpdate {
+  products: {
+    id: number,
+    quantity: number,
+  }[]
 }

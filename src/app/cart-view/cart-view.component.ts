@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CartHolderService } from '../cart-holder.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,13 +18,16 @@ import { ProductsDetail } from '../product-api.service';
 export class CartViewComponent implements OnInit {
   public cartHolder = inject(CartHolderService)
   searchText: string | undefined;
+  newPrice?: number
+
   ngOnInit(): void {
 
   }
   plusProduct(product: ProductsDetail) {
-
+    this.cartHolder.addProduct(product)
+  
   }
   minesProduct(product: ProductsDetail) {
-
+    this.cartHolder.removeProduct(product)
   }
 }

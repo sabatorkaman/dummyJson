@@ -1,5 +1,5 @@
 @if(cartHolder.allProducts().length >0){
-<div class="flex justify-between flex-wrap">
+<div class="flex justify-between flex-wrap gap-5">
     @for (product of cartHolder.allProducts(); track $index) {
 
     <mat-card class="example-card w-[400px] h-[600px] " appearance="outlined">
@@ -39,26 +39,35 @@
                 [queryParams]="{category:product.product.category}">{{product.product.category}}</a>
             <button mat-button>
                 <span class="line-through">{{product.product.price | currency}}</span>&nbsp;
-                <span>{{ (100 - product.product.discountPercentage) * (product.product.price) | currency}}</span>
+                <span>{{ (100 - product.product.discountPercentage) * product.product.price /100 | currency}}</span>
             </button>
             <p>
-
                 <app-rating [rating]="product.product.rating"></app-rating>
-
             </p>
         </mat-card-actions>
         <mat-card-actions class="flex justify-center gap-2">
             <button (click)="plusProduct(product.product)" mat-mini-fab>+</button>
+            <span>
+                {{product.count}}
+            </span>
             <button (click)="minesProduct(product.product)" mat-mini-fab>-</button>
+        </mat-card-actions>
+        <mat-card-actions>
+            <div>{{product.product.price * product.count|currency}}</div>
         </mat-card-actions>
     </mat-card>
     }
+</div>
+
+<div class="flex justify-center pt-10">
+    <p>total price:{{cartHolder.totalPrice() | currency }}</p>
 </div>}
+
 @else {
 <mat-card class="example-car w-[400px] h-[600px] flex justify-center items-center text-center mt-14"
     appearance="outlined">
     <div class="flex justify-center items-center text-center pt-11">
-        <h1 class=" w-[300px] h-[600px] ">empyt cart</h1>
+        <h1 class=" w-[300px] h-[600px] ">empty cart</h1>
     </div>
 </mat-card>
 }

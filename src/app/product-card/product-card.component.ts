@@ -9,11 +9,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartHolderService } from '../cart-holder.service';
 import { RatingComponent } from "../rating/rating.component";
 import { HighlightSearchPipe } from "../hilight-search.pipe";
+import { ReviewsComponent } from "../reviews/reviews.component";
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, CurrencyPipe, MatChipsModule, RouterLink, RatingComponent, HighlightSearchPipe],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, CurrencyPipe, MatChipsModule, RouterLink, RatingComponent, HighlightSearchPipe, ReviewsComponent],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 
@@ -23,10 +24,10 @@ export class ProductCardComponent implements OnInit {
   private route = inject(ActivatedRoute)
   @Input() product?: ProductsDetail
   @Input() searchText?: string = ""
-
   count = computed(() => this.cartHolder.allProducts().find((item) => item.product.id === this.product?.id)?.count)
   indexImage = 0
   detail?: number
+  more = false
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       this.detail = param["id"]
@@ -50,11 +51,14 @@ export class ProductCardComponent implements OnInit {
       this.cartHolder.addProduct(this.product)
     }
   }
-  removeFromCart() {
-    if (this.product !== undefined) {
-      this.cartHolder.removeProduct(this.product)
-    }
+  plusProduct(product: ProductsDetail) {
+    this.cartHolder.addProduct(product)
   }
+  minesProduct(product: ProductsDetail) {
+    this.cartHolder.removeProduct(product)
+  }
+  moreDetail() {
+    this.more = true
 
-
+  }
 }

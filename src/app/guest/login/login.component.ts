@@ -6,14 +6,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { userService } from '../../userService.service';
 import { AuthenticationService } from '../../authentication.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { JsonPipe } from '@angular/common';
+import { Router} from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [JsonPipe, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterLink, RouterLinkActive
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
