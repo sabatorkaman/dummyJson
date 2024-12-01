@@ -1,6 +1,8 @@
 @if(product !== undefined){
 @for (item of product.reviews; track $index) {
-<h1>{{item.comment}}.</h1>
-<h1>{{item.reviewerEmail}}</h1>
+<div class="flex justify-centerpy-2 ">
+    <p>{{item.comment}}</p>
+    <p>{{item.date}}</p>
+</div>
 }
 }

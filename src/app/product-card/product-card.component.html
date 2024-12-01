@@ -1,5 +1,5 @@
 @if (product !== undefined) {
-<mat-card class="example-card w-[430px] h-[650px] " appearance="outlined">
+<mat-card class="example-card w-[430px] py-2" appearance="outlined">
     <mat-card-header>
         <div mat-card-avatar class="overflow-hidden">
             <img src={{product.thumbnail}} alt="">
@@ -23,7 +23,7 @@
     <mat-card-content>
         <!-- {{product.description | hilightSearch  : searchText}} -->
         <p [innerHTML]="product.description | highlightSearch: searchText"></p>
-        <div>
+        <div class="flex justify-center mt-4">
             <mat-chip-set>
                 @for (tag of product.tags; track $index) {
                 <mat-chip>{{tag}}</mat-chip>
@@ -31,10 +31,10 @@
             </mat-chip-set>
         </div>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="flex justify-between mt-4">
         <a mat-button [routerLink]="'/products'" [queryParams]="{category:product.category}">{{product.category}}</a>
         <button mat-button>
-            <span class="line-through">{{product.price | currency}}</span>&nbsp;
+            <span class="line-through">{{product.price | currency}}</span>&nbsp;&nbsp;&nbsp;
             <span>{{ (100 - product.discountPercentage) * product.price / 100 |currency}}</span>
         </button>
         <p>
@@ -46,11 +46,11 @@
 
     </mat-card-actions>
     @if(count() === undefined){
-    <mat-card-actions class="flex justify-center my-5">
+    <mat-card-actions class="flex justify-center my-3">
         <button (click)="addToCart()" mat-button>add to cart</button>
     </mat-card-actions>
     }@else if(count() !== undefined){
-    <mat-card-actions class="flex justify-center gap-4  my-5 ">
+    <mat-card-actions class="flex justify-center gap-4  my-3">
         <button (click)="plusProduct(product)" mat-button>+</button>
         <span>
             {{count()}}
@@ -58,10 +58,11 @@
         <button (click)="minesProduct(product)" mat-button>-</button>
     </mat-card-actions>
     }
-    <button (click)="moreDetail()">...</button>
-    @if(more === true){
-    <app-reviews [product]="product"></app-reviews>
-    }@else {}
-
+    <button class="pb-3" (click)="moreDetail()">...</button>
+    <mat-card-actions class="flex justify-center">
+        @if(more === true){
+        <app-reviews [product]="product"></app-reviews>
+        }
+    </mat-card-actions>
 </mat-card>
 }
