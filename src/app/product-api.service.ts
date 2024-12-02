@@ -8,21 +8,24 @@ import { Observable } from 'rxjs';
 export class ProductApiService {
   private http = inject(HttpClient)
   constructor() { }
-  getAllProducts(limit:number , skip:number):Observable<AllProducts>{
+  getAllProducts(limit: number, skip: number): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`)
   }
-  getSearchProduct(q:string):Observable<AllProducts>{
+  getSearchProduct(q: string): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/search?q=${q}`)
   }
-  fliterByCategort(category:string):Observable<AllProducts>{
+  fliterByCategort(category: string): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products/category/${category}`)
 
   }
-  filterBySort(sortBy:"title" | "price" , order:"asc" | "desc"):Observable<AllProducts>{
+  filterBySort(sortBy: "title" | "price", order: "asc" | "desc"): Observable<AllProducts> {
     return this.http.get<AllProducts>(`https://dummyjson.com/products?sortBy=${sortBy}&order=${order}`)
   }
-  getAllCategory():Observable<string[]>{
+  getAllCategory(): Observable<string[]> {
     return this.http.get<string[]>('https://dummyjson.com/products/category-list')
+  }
+  getProductDetail(id:number):Observable<ProductsDetail> {
+    return this.http.get<ProductsDetail>(`https://dummyjson.com/products/${id}`)
   }
 
 }

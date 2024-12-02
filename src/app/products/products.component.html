@@ -1,7 +1,7 @@
-<div class="flex justify-between">
-  <mat-form-field>
-    <input matInput class="text-gray-950" type="text" name="" id="" [(ngModel)]="serachModel" (change)="filterClick()">
-  </mat-form-field>
+<mat-form-field class="w-full">
+  <input matInput class=" w-full " type="text" name="" id="" [(ngModel)]="serachModel" (change)="filterClick()">
+</mat-form-field>
+<div class="flex justify-between py-4">
   <div>
     <p class="cursor-pointer" (click)="changeOrder()">sort By order:{{order}}</p>
   </div>
