@@ -4,10 +4,14 @@
     <div class="hidden  md:block">
         @if(role() === "admin"){
         <a mat-button [routerLink]="'/admin/users'" routerLinkActive="router-link-active">users</a>
-        <a mat-button [routerLink]="'add-user'">add user</a>}
+        <a mat-button [routerLink]="'add-user'">add user</a>
+        <a mat-button [routerLink]=" '/todos'"> todos</a>
+        <a mat-button [routerLink]="'add-todo'">add todo</a>}
         <a mat-button [routerLink]=" '/post'"> posts</a>
         <a mat-button [routerLink]=" '/products'"> products</a>
         <a mat-button [routerLink]="'/cart'"><mat-icon fontIcon="shopping_cart">
+
+
 
             </mat-icon> <span>
                 <!-- @for (item of cartHolder.allProducts(); track $index){

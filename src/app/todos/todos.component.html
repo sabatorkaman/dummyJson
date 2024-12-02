@@ -1,0 +1,30 @@
+<div class=" flex justify-between flex-wrap gap-6">
+    @for (item of todos; track $index) {
+
+    <mat-card class="w-[500px]" appearance="outlined">
+        <mat-card-header>
+            <div>{{item.todo}}</div>
+            <span>{{item.id}}</span>
+        </mat-card-header>
+        <mat-card-actions>
+            <div>{{item.completed}}</div>
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>
+<mat-slide-toggle class="mt-10" [checked]="checked" [disabled]="disabled" (toggleChange)="toggleCompleted()">
+    completed</mat-slide-toggle>
+@if(checked === true){
+<div class="flex flex-col justify-center gap-6 transition-all duration-1000  mt-6">
+    @for (item of completed; track $index) {
+    <mat-card>
+        <mat-card-content class="line-through">{{item.todo}}</mat-card-content>
+    </mat-card>
+    }
+</div>
+}
+<div class="flex justify-center pt-12">
+    <button mat-button class="" (click)="moreProduct()">
+        more todo
+    </button>
+</div>

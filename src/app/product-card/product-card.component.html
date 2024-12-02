@@ -1,7 +1,8 @@
 @if (product !== undefined) {
-<a [routerLink]="'products'" [queryParams]="{id:product.id}">
 
-    <mat-card class="example-card w-[430px] py-2" appearance="outlined">
+<mat-card class="example-card w-[430px] py-2" appearance="outlined">
+    <a [routerLink]="'products'" [queryParams]="{id:product.id}">
+
         <mat-card-header>
             <div mat-card-avatar class="overflow-hidden">
                 <img src={{product.thumbnail}} alt="">
@@ -46,25 +47,26 @@
             </p>
 
         </mat-card-actions>
-        @if(count() === undefined){
-        <mat-card-actions class="flex justify-center my-3">
-            <button (click)="addToCart()" mat-button>add to cart</button>
-        </mat-card-actions>
-        }@else if(count() !== undefined){
-        <mat-card-actions class="flex justify-center gap-4  my-3">
-            <button (click)="plusProduct(product)" mat-button>+</button>
-            <span>
-                {{count()}}
-            </span>
-            <button (click)="minesProduct(product)" mat-button>-</button>
-        </mat-card-actions>
+    </a>
+    @if(count() === undefined){
+    <mat-card-actions class="flex justify-center my-3">
+        <button (click)="addToCart()" mat-button>add to cart</button>
+    </mat-card-actions>
+    }@else if(count() !== undefined){
+    <mat-card-actions class="flex justify-center gap-4  my-3">
+        <button (click)="plusProduct(product)" mat-button>+</button>
+        <span>
+            {{count()}}
+        </span>
+        <button (click)="minesProduct(product)" mat-button>-</button>
+    </mat-card-actions>
+    }
+    <button class="pb-3" (click)="moreDetail()">...</button>
+    <mat-card-actions class="flex justify-center">
+        @if(more === true){
+        <app-reviews [product]="product"></app-reviews>
         }
-        <button class="pb-3" (click)="moreDetail()">...</button>
-        <mat-card-actions class="flex justify-center">
-            @if(more === true){
-            <app-reviews [product]="product"></app-reviews>
-            }
-        </mat-card-actions>
-    </mat-card>
-</a>
+    </mat-card-actions>
+</mat-card>
+
 }

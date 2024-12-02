@@ -1,0 +1,16 @@
+<mat-form-field>
+    <mat-label>todo</mat-label>
+    <input matInput [(ngModel)]="todo">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>completed</mat-label>
+    <mat-select >
+        <mat-option value="true">true</mat-option>
+        <mat-option value="false">false</mat-option>
+    </mat-select>
+</mat-form-field>
+<!-- <mat-form-field>
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+</mat-form-field> -->
+<button (click)="submitClick()">submit</button>

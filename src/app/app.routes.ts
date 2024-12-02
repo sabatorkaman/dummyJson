@@ -11,6 +11,8 @@ import { ProductsComponent } from './products/products.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { TodosComponent } from './todos/todos.component';
+import { TodoAddComponent } from './todo-add/todo-add.component';
 
 export const routes: Routes = [
     {
@@ -57,6 +59,18 @@ export const routes: Routes = [
     }, {
         path: "products/:id",
         component: ProductDetailComponent
+    },
+    {
+        path:"todos",
+        component:TodosComponent,
+        canActivate: [isAuthenticated, hasAdminRole],
+
+    },
+    {
+        path:"add-todo",
+        component:TodoAddComponent,
+        canActivate: [isAuthenticated, hasAdminRole],
+
     }
 
 ];

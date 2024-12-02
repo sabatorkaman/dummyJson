@@ -10,9 +10,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
     provideAnimationsAsync(),
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-   MatDatepickerModule,  ]
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    MatDatepickerModule,]
 };
