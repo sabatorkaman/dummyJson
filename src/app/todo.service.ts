@@ -15,8 +15,15 @@ export class TodoService {
   getTodoSingle(id: number): Observable<TodoDetail> {
     return this.http.get<TodoDetail>(`https://dummyjson.com/todos/${id}`)
   }
-  addTodo(newTodo:TodoDetail): Observable<TodoDetail> {
+  addTodo(newTodo: TodoDetail): Observable<TodoDetail> {
     return this.http.post<TodoDetail>('https://dummyjson.com/todos/add', newTodo)
+  }
+  deleteTodo(id: number): Observable<TodoDetail> {
+    return this.http.delete<TodoDetail>(`https://dummyjson.com/users/${id}`)
+
+  }
+  updateTodo(id: number, editTodo: TodoDetail): Observable<TodoDetail> {
+    return this.http.put<TodoDetail>(`https://dummyjson.com/todos/${id}`, editTodo)
   }
 }
 export interface AllTodo {

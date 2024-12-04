@@ -1,30 +1,40 @@
-<div class=" flex justify-between flex-wrap gap-6">
+<div class=" w-[1400px] border border-gray-600 px-8 rounded-sm">
     @for (item of todos; track $index) {
-
-    <mat-card class="w-[500px]" appearance="outlined">
-        <mat-card-header>
-            <div>{{item.todo}}</div>
-            <span>{{item.id}}</span>
-        </mat-card-header>
-        <mat-card-actions>
-            <div>{{item.completed}}</div>
+    <mat-card class="w-[1200px] m-auto flex justify-center mt-8" appearance="outlined">
+        <mat-card-actions class="flex justify-between mx-7 py-4 ">
+            <div>{{item.todo}}</div>&nbsp;&nbsp;
+            <div class="flex justify-between gap-4">
+                <button (click)="changeCompleted(item)">{{item.completed}}</button>
+                <button (click)="removeTodo(item)"><mat-icon>delete</mat-icon></button>
+                <a [routerLink]="'todos'" [queryParams]="{edit:todos}"
+                    routerLinkActive="router-link-active"><mat-icon>edit</mat-icon></a>
+                <!-- <a [routerLink]="'edit-todo'">edit</a> -->
+            </div>
         </mat-card-actions>
     </mat-card>
     }
-</div>
-<mat-slide-toggle class="mt-10" [checked]="checked" [disabled]="disabled" (toggleChange)="toggleCompleted()">
-    completed</mat-slide-toggle>
-@if(checked === true){
-<div class="flex flex-col justify-center gap-6 transition-all duration-1000  mt-6">
-    @for (item of completed; track $index) {
-    <mat-card>
-        <mat-card-content class="line-through">{{item.todo}}</mat-card-content>
-    </mat-card>
+    <mat-slide-toggle class="my-10  mx-12" [checked]="checked" [disabled]="disabled" (toggleChange)="toggleCompleted()">
+        completed</mat-slide-toggle>
+    @if(checked === true){
+    <div class="flex w-[1200px] m-auto flex-col justify-center gap-6 transition-all duration-1000 mx-10  my-6">
+        @for (complete of completed; track $index) {
+        <mat-card class="">
+            <mat-card-content>
+                <div class=" flex flex-row justify-between py-4 mx-10">
+                    <div class="line-through">{{complete.todo}}</div>
+                    <div class="flex justify-between gap-8 ">
+                        <button (click)="removeCompletedTodo(complete)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+        }
+    </div>
     }
 </div>
-}
 <div class="flex justify-center pt-12">
-    <button mat-button class="" (click)="moreProduct()">
+    <button mat-flat-button class="" (click)="moreProduct()">
         more todo
     </button>
 </div>
