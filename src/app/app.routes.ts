@@ -74,8 +74,10 @@ export const routes: Routes = [
 
     },
     {
-        path: "todos/:edit",
-        component: TodoEditComponent
+        path: "edit-todos",
+        component: TodoEditComponent,
+        canActivate: [isAuthenticated, hasAdminRole],
+
     }
 
 ];

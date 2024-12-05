@@ -1,1 +1,11 @@
-<p>todo-edit works!</p>
+<div class="w-[1400px] flex flex-col gap-6 text-center">
+
+    <mat-form-field class="w-full">
+        <mat-label>edit todo</mat-label>
+        <div class="flex justify-between">
+            <input matInput class="w-full" value={{todo?.todo}} [(ngModel)]="todoValue">
+            <button class="" mat-button (click)="editClick()">edit</button>
+        </div>
+    </mat-form-field>
+    <button class="w-20 m-auto text-center" mat-flat-button (click)="submitClick()">submit</button>
+</div>

@@ -22,8 +22,8 @@ export class TodoService {
     return this.http.delete<TodoDetail>(`https://dummyjson.com/users/${id}`)
 
   }
-  updateTodo(id: number, editTodo: TodoDetail): Observable<TodoDetail> {
-    return this.http.put<TodoDetail>(`https://dummyjson.com/todos/${id}`, editTodo)
+  updateTodo(id: number, completed: boolean): Observable<TodoDetail> {
+    return this.http.put<TodoDetail>(`https://dummyjson.com/todos/${id}`, {completed:completed})
   }
 }
 export interface AllTodo {

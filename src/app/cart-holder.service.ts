@@ -1,7 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { CartDetail, CartService } from './cart.service';
+import {  CartService } from './cart.service';
 import { ProductsDetail } from './product-api.service';
-import { count } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
