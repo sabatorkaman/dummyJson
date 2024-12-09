@@ -15,7 +15,7 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductDetailComponent implements OnInit {
   private productApi = inject(ProductApiService)
   private route = inject(ActivatedRoute)
-  private cartHolder = inject(CartHolderService)
+  public cartHolder = inject(CartHolderService)
   id?: number
   product?: ProductsDetail
   count = computed(() => this.cartHolder.allProducts().find((item) => item.product.id === this.product?.id)?.count)
@@ -29,7 +29,6 @@ export class ProductDetailComponent implements OnInit {
       this.productApi.getProductDetail(this.id).subscribe((item) => {
         this.product = item
       })
-
     }
   }
   addToCart() {

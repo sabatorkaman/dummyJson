@@ -14,6 +14,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { TodosComponent } from './todos/todos.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 export const routes: Routes = [
     {
@@ -78,6 +79,11 @@ export const routes: Routes = [
         component: TodoEditComponent,
         canActivate: [isAuthenticated, hasAdminRole],
 
+    },
+    {
+        path: "recipes",
+        component: RecipesComponent
     }
+
 
 ];

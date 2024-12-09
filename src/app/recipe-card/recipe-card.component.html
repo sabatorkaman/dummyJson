@@ -1,0 +1,20 @@
+@if(recipe !== undefined){
+<mat-card class="w-[500px] p-[20px]" appearance="outlined">
+    <mat-card-header class="mb-8">
+        <img src={{recipe.image}} class="w-7 h-7 rounded-full" alt="">
+        <mat-card-title>{{recipe.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{recipe.image}} alt="no image">
+    <mat-card-content class="">
+        <p>{{recipe.instructions}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <p mat-button class="">{{recipe.cuisine}}</p>
+    </mat-card-actions>
+    <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
+}

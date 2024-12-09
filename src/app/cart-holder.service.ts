@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import {  CartService } from './cart.service';
+import { CartService } from './cart.service';
 import { ProductsDetail } from './product-api.service';
 
 @Injectable({
@@ -30,8 +30,8 @@ export class CartHolderService {
       products: this.allProducts().map((item) => {
         return { id: item.product.id, quantity: item.count }
       })
-    }).subscribe((resultupdate) => {
-      console.log(resultupdate)
+    }).subscribe((resultUpdate) => {
+      console.log(resultUpdate)
     })
 
     this.saveProductStorage()

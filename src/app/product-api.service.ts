@@ -32,7 +32,7 @@ export class ProductApiService {
 
 
 export interface AllProducts {
-  "products": ProductsDetail[]
+  products: ProductsDetail[]
   total: number,
   skip: number,
   limit: number

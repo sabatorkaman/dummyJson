@@ -2,7 +2,7 @@
 <div class="flex justify-center">
 
 
-    <mat-card class="w-[800px] h-[600px] " appearance="outlined">
+    <mat-card class="w-[800px] h-[600px] px-8 py-10" appearance="outlined">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{product.title}}</mat-card-title>
@@ -31,9 +31,14 @@
             </span>
             <button (click)="minesProduct(product)" mat-button>-</button>
         </mat-card-actions>
-        <span>{{ (100 - product.discountPercentage) * product.price / 100 | currency}}</span>
+        <span>{{ product.price }}</span>
 
+        }
+        @for (item of cartHolder.allProducts() ; track $index) {
+        <div class="pb-0">total count: <samp>{{item.product.price * item.count | currency}}</samp>
+        </div>
         }
     </mat-card>
 </div>
+<!-- } -->
 }

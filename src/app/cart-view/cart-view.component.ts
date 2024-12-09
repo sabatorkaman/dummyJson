@@ -18,7 +18,7 @@ import { ProductsDetail } from '../product-api.service';
 export class CartViewComponent implements OnInit {
   public cartHolder = inject(CartHolderService)
   searchText: string | undefined;
-  newPrice?: number
+
 
   ngOnInit(): void {
 

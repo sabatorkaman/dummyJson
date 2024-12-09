@@ -10,8 +10,9 @@
         }
         <a mat-button [routerLink]=" '/post'"> posts</a>
         <a mat-button [routerLink]=" '/products'"> products</a>
-        <a mat-button [routerLink]="'/cart'"><mat-icon fontIcon="shopping_cart">
+        <a [routerLink]="'/recipes'" routerLinkActive="router-link-active" mat-button>recipes</a>
 
+        <a mat-button [routerLink]="'/cart'"><mat-icon fontIcon="shopping_cart">
 
 
             </mat-icon> <span>
